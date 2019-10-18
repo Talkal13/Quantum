@@ -3,7 +3,7 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, execute, 
 
 # Define the Quantum and Classical Registers
 a = QuantumRegister(3, "a")
-t = QuantumRegister(6, "t")
+t = QuantumRegister(5, "t")
 c = ClassicalRegister(2, "b")
 
 # Build the circuit
@@ -25,7 +25,9 @@ cir.ccx(a[0], a[1], t[1])
 cir.ccx(a[1], a[2], t[2])
 #OR
 cir.cswap(t[0], t[1], t[3])
-cir.cswap(t[1], t[2], t[4])
+cir.reset(t[3])
+cir.x(t[3])
+cir.cswap(t[1], t[2], t[3])
 
 
 cir.measure(t[2], c[1])
@@ -57,7 +59,9 @@ cir.reset(t[4])
 cir.x(t[4:6])
 
 cir.cswap(t[0], t[1], t[4])
-cir.cswap(t[1], t[2], t[5])
+cir.reset(t[4])
+cir.x(t[4])
+cir.cswap(t[1], t[2], t[4])
 
 cir.reset(t[4:6])
 cir.x(t[4:6])
