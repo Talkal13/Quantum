@@ -13,7 +13,7 @@ class BB84:
         self.b = []
         self.keya = []
         self.keyb = []
-        self.assure = 0.1
+        self.assure = assure
         self.qc = channel(self.n) # Quantum channel
         self.cp = BB84_qc(self.n, self.qc) # Channel Protocol
 
