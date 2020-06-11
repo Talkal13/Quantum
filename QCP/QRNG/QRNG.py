@@ -33,3 +33,36 @@ class QRNG:
         job = execute(qc, backend, shots=1)
         counts = job.result().get_counts()
         return list(counts.keys())[0]
+
+    @staticmethod
+    def random_bell(n=1, p_0=0.5):
+        '''Generates a bell state with random amplitudes and executes it 
+        since information about the state of the qubits happens in QuantumCircuit hence no QuantumRegister can be returned'''
+
+        # Probability of 1
+        p_1 = 1 - p_0
+
+        # Generate cirucuit
+        c = QuantumRegister(n)
+        t = QuantumRegister(n)
+
+        qc = QuantumCircuit(c, t, name="Random bell pair generator")
+
+        angle = p_1 * pi
+
+        qc.ry(angle, c)
+        for i in range(n):
+            qc.cx(c[i], t[i])
+
+        qc.measure_all()
+
+        # Get backend
+        backend = Aer.get_backend("qasm_simulator")
+
+        #
+        job = execute(qc, backend, shots=1)
+        counts = job.result().get_counts()
+        s  = list(counts.keys())[0]
+        mid = int(len(s)/2)
+        return (s[:mid], s[mid:])
+
