@@ -1,4 +1,4 @@
-from channel import channel
+from core.channel import channel
 from QRNG.QRNG import QRNG
 from math import ceil
 
