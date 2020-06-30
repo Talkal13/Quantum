@@ -37,7 +37,7 @@ class QRNG:
     @staticmethod
     def random_bell(n=1, p_0=0.5):
         '''Generates a bell state with random amplitudes and executes it 
-        since information about the state of the qubits happens in QuantumCircuit hence no QuantumRegister can be returned'''
+        all the information about the state of the qubits happens inside a QuantumCircuit hence no QuantumRegister can be returned'''
 
         # Probability of 1
         p_1 = 1 - p_0

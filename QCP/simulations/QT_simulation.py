@@ -24,7 +24,7 @@ class Alice(agent):
         qc = QuantumCircuit(q)
 
         # Set up state
-        qc.rx(2/3 * pi, q)
+        qc.ry(2/3 * pi, q)
         return qc
 
 

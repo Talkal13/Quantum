@@ -16,7 +16,11 @@ class QuantumTeleport:
 
     def send(self, phi):
         self.lock.acquire()
+        
+        # encode the qubit
         self.qc.append(phi, self.q)
+
+
         self.qc.cx(self.q, self.a)
         self.qc.h(self.q)
         self.result = self.measure()
@@ -27,9 +31,9 @@ class QuantumTeleport:
         if self.result is None: return
         if self.result == "00":
             pass
-        elif self.result == "01":
-            self.qc.x(self.b)
         elif self.result == "10":
+            self.qc.x(self.b)
+        elif self.result == "01":
             self.qc.z(self.b)
         else:
             self.qc.x(self.b)
@@ -39,7 +43,7 @@ class QuantumTeleport:
         cb = ClassicalRegister(2)
         self.qc.add_register(cb)
         self.qc.measure(self.q, cb[0])
-        self.qc.measure(self.a, cb[0])
+        self.qc.measure(self.a, cb[1])
         (result, statevector) = self.execute()
         self.reset_qc(statevector)
         return result

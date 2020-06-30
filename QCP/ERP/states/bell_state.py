@@ -1,4 +1,4 @@
-from ERP.ERPS import ERPS
+from ..ERPS import ERPS
 
 class bell_state(ERPS):
 

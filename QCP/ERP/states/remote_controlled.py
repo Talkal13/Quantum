@@ -1,5 +1,5 @@
 
-from ERP.ERPS import ERPS
+from ..ERPS import ERPS
 from math import pi, acos
 
 class remote_controlled(ERPS):
