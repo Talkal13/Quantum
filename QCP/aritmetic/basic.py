@@ -41,5 +41,3 @@ def sum(a, b):
 def rest(a, b):
     ''' Rests a - b on 'a' register, if it can't handle it will overflow'''
     return sum(a, b).inverse()
-
-def ifb(a, b, qc):

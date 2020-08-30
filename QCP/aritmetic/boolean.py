@@ -20,7 +20,7 @@ def qand():
     q = QuantumRegister(2)
     a = QuantumRegister(1)
     qc = QuantumCircuit(q, a)
-    qc.ccx(q, a)
+    qc.ccx(q[0], q[1], a)
 
     return qc
 
@@ -29,7 +29,7 @@ def qor():
     a = QuantumRegister(1)
     qc = QuantumCircuit(q, a)
     qc.x(q)
-    qc.ccx(q, a)
+    qc.ccx(q[0], q[1], a)
     qc.x(q)
     qc.x(a)
 
