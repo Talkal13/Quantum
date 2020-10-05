@@ -56,8 +56,6 @@ def mult(a, b):
         qc.append(sum(a+b, a).to_gate().control(1), [anc] + cq[:] + aq[:])
         qc.append(sub(1, b).to_gate().control(1), [anc] + bq[:])
         qc.reset(anc)
-    
-    print(qc)
 
     return qc
 

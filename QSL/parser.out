@@ -1,0 +1,177 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ASIG
+    DIV
+    ID
+    MULT
+    NUMBER
+
+Grammar
+
+Rule 0     S' -> line
+Rule 1     line -> rl
+Rule 2     line -> rl NL
+Rule 3     rl -> rl ADD rq
+Rule 4     rl -> rl SUB rq
+Rule 5     rl -> rq
+Rule 6     rq -> ket bra
+Rule 7     ket -> KET
+Rule 8     bra -> BRA
+
+Terminals, with rules where they appear
+
+ADD                  : 3
+ASIG                 : 
+BRA                  : 8
+DIV                  : 
+ID                   : 
+KET                  : 7
+MULT                 : 
+NL                   : 2
+NUMBER               : 
+SUB                  : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+bra                  : 6
+ket                  : 6
+line                 : 0
+rl                   : 1 2 3 4
+rq                   : 3 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . line
+    (1) line -> . rl
+    (2) line -> . rl NL
+    (3) rl -> . rl ADD rq
+    (4) rl -> . rl SUB rq
+    (5) rl -> . rq
+    (6) rq -> . ket bra
+    (7) ket -> . KET
+
+    KET             shift and go to state 5
+
+    line                           shift and go to state 1
+    rl                             shift and go to state 2
+    rq                             shift and go to state 3
+    ket                            shift and go to state 4
+
+state 1
+
+    (0) S' -> line .
+
+
+
+state 2
+
+    (1) line -> rl .
+    (2) line -> rl . NL
+    (3) rl -> rl . ADD rq
+    (4) rl -> rl . SUB rq
+
+    $end            reduce using rule 1 (line -> rl .)
+    NL              shift and go to state 6
+    ADD             shift and go to state 7
+    SUB             shift and go to state 8
+
+
+state 3
+
+    (5) rl -> rq .
+
+    NL              reduce using rule 5 (rl -> rq .)
+    ADD             reduce using rule 5 (rl -> rq .)
+    SUB             reduce using rule 5 (rl -> rq .)
+    $end            reduce using rule 5 (rl -> rq .)
+
+
+state 4
+
+    (6) rq -> ket . bra
+    (8) bra -> . BRA
+
+    BRA             shift and go to state 10
+
+    bra                            shift and go to state 9
+
+state 5
+
+    (7) ket -> KET .
+
+    BRA             reduce using rule 7 (ket -> KET .)
+
+
+state 6
+
+    (2) line -> rl NL .
+
+    $end            reduce using rule 2 (line -> rl NL .)
+
+
+state 7
+
+    (3) rl -> rl ADD . rq
+    (6) rq -> . ket bra
+    (7) ket -> . KET
+
+    KET             shift and go to state 5
+
+    rq                             shift and go to state 11
+    ket                            shift and go to state 4
+
+state 8
+
+    (4) rl -> rl SUB . rq
+    (6) rq -> . ket bra
+    (7) ket -> . KET
+
+    KET             shift and go to state 5
+
+    rq                             shift and go to state 12
+    ket                            shift and go to state 4
+
+state 9
+
+    (6) rq -> ket bra .
+
+    NL              reduce using rule 6 (rq -> ket bra .)
+    ADD             reduce using rule 6 (rq -> ket bra .)
+    SUB             reduce using rule 6 (rq -> ket bra .)
+    $end            reduce using rule 6 (rq -> ket bra .)
+
+
+state 10
+
+    (8) bra -> BRA .
+
+    NL              reduce using rule 8 (bra -> BRA .)
+    ADD             reduce using rule 8 (bra -> BRA .)
+    SUB             reduce using rule 8 (bra -> BRA .)
+    $end            reduce using rule 8 (bra -> BRA .)
+
+
+state 11
+
+    (3) rl -> rl ADD rq .
+
+    NL              reduce using rule 3 (rl -> rl ADD rq .)
+    ADD             reduce using rule 3 (rl -> rl ADD rq .)
+    SUB             reduce using rule 3 (rl -> rl ADD rq .)
+    $end            reduce using rule 3 (rl -> rl ADD rq .)
+
+
+state 12
+
+    (4) rl -> rl SUB rq .
+
+    NL              reduce using rule 4 (rl -> rl SUB rq .)
+    ADD             reduce using rule 4 (rl -> rl SUB rq .)
+    SUB             reduce using rule 4 (rl -> rl SUB rq .)
+    $end            reduce using rule 4 (rl -> rl SUB rq .)
+
