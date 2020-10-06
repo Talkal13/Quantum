@@ -1,5 +1,6 @@
 from qiskit import QuantumRegister, QuantumCircuit
 from helper.helper import bitfield
+from .boolean import qor
 
 def add(k, n):
     ''' Generates a quantum circuit that adds k to n qubits where represents q[0] the less significant qubit'''
@@ -33,11 +34,29 @@ def sum(a, b):
     for i in range(b):
         for j in reversed(range(i, a)):
             qc.mct(aq[i:j] + [bq[i]], aq[j], None, mode='advanced')
-        
-    print(qc)
+
     return qc
 
 
 def rest(a, b):
     ''' Rests a - b on 'a' register, if it can't handle it will overflow'''
     return sum(a, b).inverse()
+
+
+def mult(a, b):
+    aq = QuantumRegister(a)
+    bq = QuantumRegister(b)
+    cq = QuantumRegister(a + b)
+    anc = QuantumRegister(1)
+
+    qc = QuantumCircuit(aq, bq, cq, anc, name="Mult(%i, %i)" % (a, b))
+
+    for _ in range(pow(2, b)):
+        qc.append(qor(b), bq[:] + [anc])
+        qc.append(sum(a+b, a).to_gate().control(1), [anc] + cq[:] + aq[:])
+        qc.append(sub(1, b).to_gate().control(1), [anc] + bq[:])
+        qc.reset(anc)
+
+    return qc
+
+    

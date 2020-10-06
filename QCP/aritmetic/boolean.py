@@ -1,4 +1,5 @@
 from qiskit import QuantumCircuit, QuantumRegister
+from qiskit.circuit.library.standard_gates import XGate
 
 def qnot():
 
@@ -20,16 +21,17 @@ def qand():
     q = QuantumRegister(2)
     a = QuantumRegister(1)
     qc = QuantumCircuit(q, a)
-    qc.ccx(q, a)
+    qc.ccx(q[0], q[1], a)
 
     return qc
 
-def qor():
-    q = QuantumRegister(2)
+def qor(n=2):
+    q = QuantumRegister(n)
     a = QuantumRegister(1)
-    qc = QuantumCircuit(q, a)
+    qc = QuantumCircuit(q, a, name="Or(%i)" % n)
+    
     qc.x(q)
-    qc.ccx(q, a)
+    qc.append(XGate().control(n), q[:] + [a])
     qc.x(q)
     qc.x(a)
 

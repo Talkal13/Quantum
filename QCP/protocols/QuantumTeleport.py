@@ -28,6 +28,7 @@ class QuantumTeleport:
         return self.result
 
     def recive(self):
+        self.lock.acquire()
         if self.result is None: return
         if self.result == "00":
             pass
@@ -38,6 +39,7 @@ class QuantumTeleport:
         else:
             self.qc.x(self.b)
             self.qc.z(self.b)
+        self.lock.release()
 
     def measure(self):
         cb = ClassicalRegister(2)
