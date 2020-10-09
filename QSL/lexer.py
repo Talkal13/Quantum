@@ -14,17 +14,19 @@ tokens = [
     'ADD',
     'SUB',
     'DIV',
-    'ASIG',
+    'ASSIGN',
     # Constants
     'NUMBER',
-    'NL'
+    'NL',
+    'CKET',
+    'CBRA'
 ] + list(reserved.values())
 
 t_MULT = r'\*'
 t_ADD = r'\+'
 t_SUB = r'-'
 t_DIV = r'/'
-t_ASIG = r':='
+t_ASSIGN = r':='
 
 def t_NUMBER(t):
     r'[-+]?\d+(.\d+)?'
@@ -32,11 +34,19 @@ def t_NUMBER(t):
     return t
 
 def t_BRA(t):
-    r'<[a-zA-Z_0-9]+\|'
+    r'<[a-zA-Z][a-zA-Z_0-9]*\|'
     return t
 
 def t_KET(t):
-    r'\|[a-zA-Z_0-9]+\>'
+    r'\|[a-zA-Z][a-zA-Z_0-9]*\>'
+    return t
+
+def t_CBRA(t):
+    r'<\d+\|'
+    return t
+
+def t_CKET(t):
+    r'\|\d+\>'
     return t
 
 def t_ID(t):

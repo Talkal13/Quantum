@@ -2,176 +2,764 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    ASIG
     DIV
-    ID
     MULT
     NUMBER
 
 Grammar
 
-Rule 0     S' -> line
-Rule 1     line -> rl
-Rule 2     line -> rl NL
-Rule 3     rl -> rl ADD rq
-Rule 4     rl -> rl SUB rq
-Rule 5     rl -> rq
-Rule 6     rq -> ket bra
-Rule 7     ket -> KET
-Rule 8     bra -> BRA
+Rule 0     S' -> program
+Rule 1     program -> lines line
+Rule 2     program -> line
+Rule 3     line -> expresion
+Rule 4     line -> expresion NL
+Rule 5     lines -> lines line
+Rule 6     lines -> line
+Rule 7     expresion -> e0
+Rule 8     expresion -> assign
+Rule 9     assign -> des ASSIGN e0
+Rule 10    des -> ket_des
+Rule 11    des -> bra_des
+Rule 12    des -> id_des
+Rule 13    ket_des -> KET
+Rule 14    bra_des -> BRA
+Rule 15    id_des -> ID
+Rule 16    e0 -> e0 ADD e1
+Rule 17    e0 -> e0 SUB e1
+Rule 18    e0 -> e1
+Rule 19    e1 -> ket bra
+Rule 20    e1 -> e2
+Rule 21    e2 -> ket
+Rule 22    e2 -> bra
+Rule 23    e2 -> id
+Rule 24    ket -> ketv
+Rule 25    ket -> cket
+Rule 26    bra -> brav
+Rule 27    bra -> cbra
+Rule 28    cket -> CKET
+Rule 29    cbra -> CBRA
+Rule 30    ketv -> KET
+Rule 31    brav -> BRA
+Rule 32    id -> ID
 
 Terminals, with rules where they appear
 
-ADD                  : 3
-ASIG                 : 
-BRA                  : 8
+ADD                  : 16
+ASSIGN               : 9
+BRA                  : 14 31
+CBRA                 : 29
+CKET                 : 28
 DIV                  : 
-ID                   : 
-KET                  : 7
+ID                   : 15 32
+KET                  : 13 30
 MULT                 : 
-NL                   : 2
+NL                   : 4
 NUMBER               : 
-SUB                  : 4
+SUB                  : 17
 error                : 
 
 Nonterminals, with rules where they appear
 
-bra                  : 6
-ket                  : 6
-line                 : 0
-rl                   : 1 2 3 4
-rq                   : 3 4 5
+assign               : 8
+bra                  : 19 22
+bra_des              : 11
+brav                 : 26
+cbra                 : 27
+cket                 : 25
+des                  : 9
+e0                   : 7 9 16 17
+e1                   : 16 17 18
+e2                   : 20
+expresion            : 3 4
+id                   : 23
+id_des               : 12
+ket                  : 19 21
+ket_des              : 10
+ketv                 : 24
+line                 : 1 2 5 6
+lines                : 1 5
+program              : 0
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . line
-    (1) line -> . rl
-    (2) line -> . rl NL
-    (3) rl -> . rl ADD rq
-    (4) rl -> . rl SUB rq
-    (5) rl -> . rq
-    (6) rq -> . ket bra
-    (7) ket -> . KET
+    (0) S' -> . program
+    (1) program -> . lines line
+    (2) program -> . line
+    (5) lines -> . lines line
+    (6) lines -> . line
+    (3) line -> . expresion
+    (4) line -> . expresion NL
+    (7) expresion -> . e0
+    (8) expresion -> . assign
+    (16) e0 -> . e0 ADD e1
+    (17) e0 -> . e0 SUB e1
+    (18) e0 -> . e1
+    (9) assign -> . des ASSIGN e0
+    (19) e1 -> . ket bra
+    (20) e1 -> . e2
+    (10) des -> . ket_des
+    (11) des -> . bra_des
+    (12) des -> . id_des
+    (24) ket -> . ketv
+    (25) ket -> . cket
+    (21) e2 -> . ket
+    (22) e2 -> . bra
+    (23) e2 -> . id
+    (13) ket_des -> . KET
+    (14) bra_des -> . BRA
+    (15) id_des -> . ID
+    (30) ketv -> . KET
+    (28) cket -> . CKET
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (32) id -> . ID
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
 
-    KET             shift and go to state 5
+    KET             shift and go to state 18
+    BRA             shift and go to state 19
+    ID              shift and go to state 20
+    CKET            shift and go to state 21
+    CBRA            shift and go to state 24
 
-    line                           shift and go to state 1
-    rl                             shift and go to state 2
-    rq                             shift and go to state 3
-    ket                            shift and go to state 4
+    program                        shift and go to state 1
+    lines                          shift and go to state 2
+    line                           shift and go to state 3
+    expresion                      shift and go to state 4
+    e0                             shift and go to state 5
+    assign                         shift and go to state 6
+    e1                             shift and go to state 7
+    des                            shift and go to state 8
+    ket                            shift and go to state 9
+    bra                            shift and go to state 10
+    e2                             shift and go to state 11
+    ket_des                        shift and go to state 12
+    bra_des                        shift and go to state 13
+    id_des                         shift and go to state 14
+    ketv                           shift and go to state 15
+    cket                           shift and go to state 16
+    id                             shift and go to state 17
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
 
 state 1
 
-    (0) S' -> line .
+    (0) S' -> program .
 
 
 
 state 2
 
-    (1) line -> rl .
-    (2) line -> rl . NL
-    (3) rl -> rl . ADD rq
-    (4) rl -> rl . SUB rq
+    (1) program -> lines . line
+    (5) lines -> lines . line
+    (3) line -> . expresion
+    (4) line -> . expresion NL
+    (7) expresion -> . e0
+    (8) expresion -> . assign
+    (16) e0 -> . e0 ADD e1
+    (17) e0 -> . e0 SUB e1
+    (18) e0 -> . e1
+    (9) assign -> . des ASSIGN e0
+    (19) e1 -> . ket bra
+    (20) e1 -> . e2
+    (10) des -> . ket_des
+    (11) des -> . bra_des
+    (12) des -> . id_des
+    (24) ket -> . ketv
+    (25) ket -> . cket
+    (21) e2 -> . ket
+    (22) e2 -> . bra
+    (23) e2 -> . id
+    (13) ket_des -> . KET
+    (14) bra_des -> . BRA
+    (15) id_des -> . ID
+    (30) ketv -> . KET
+    (28) cket -> . CKET
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (32) id -> . ID
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
 
-    $end            reduce using rule 1 (line -> rl .)
-    NL              shift and go to state 6
-    ADD             shift and go to state 7
-    SUB             shift and go to state 8
+    KET             shift and go to state 18
+    BRA             shift and go to state 19
+    ID              shift and go to state 20
+    CKET            shift and go to state 21
+    CBRA            shift and go to state 24
 
+    line                           shift and go to state 25
+    expresion                      shift and go to state 4
+    e0                             shift and go to state 5
+    assign                         shift and go to state 6
+    e1                             shift and go to state 7
+    des                            shift and go to state 8
+    ket                            shift and go to state 9
+    bra                            shift and go to state 10
+    e2                             shift and go to state 11
+    ket_des                        shift and go to state 12
+    bra_des                        shift and go to state 13
+    id_des                         shift and go to state 14
+    ketv                           shift and go to state 15
+    cket                           shift and go to state 16
+    id                             shift and go to state 17
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
 
 state 3
 
-    (5) rl -> rq .
+    (2) program -> line .
+    (6) lines -> line .
 
-    NL              reduce using rule 5 (rl -> rq .)
-    ADD             reduce using rule 5 (rl -> rq .)
-    SUB             reduce using rule 5 (rl -> rq .)
-    $end            reduce using rule 5 (rl -> rq .)
+    $end            reduce using rule 2 (program -> line .)
+    KET             reduce using rule 6 (lines -> line .)
+    BRA             reduce using rule 6 (lines -> line .)
+    ID              reduce using rule 6 (lines -> line .)
+    CKET            reduce using rule 6 (lines -> line .)
+    CBRA            reduce using rule 6 (lines -> line .)
 
 
 state 4
 
-    (6) rq -> ket . bra
-    (8) bra -> . BRA
+    (3) line -> expresion .
+    (4) line -> expresion . NL
 
-    BRA             shift and go to state 10
+    $end            reduce using rule 3 (line -> expresion .)
+    KET             reduce using rule 3 (line -> expresion .)
+    BRA             reduce using rule 3 (line -> expresion .)
+    ID              reduce using rule 3 (line -> expresion .)
+    CKET            reduce using rule 3 (line -> expresion .)
+    CBRA            reduce using rule 3 (line -> expresion .)
+    NL              shift and go to state 26
 
-    bra                            shift and go to state 9
 
 state 5
 
-    (7) ket -> KET .
+    (7) expresion -> e0 .
+    (16) e0 -> e0 . ADD e1
+    (17) e0 -> e0 . SUB e1
 
-    BRA             reduce using rule 7 (ket -> KET .)
+    NL              reduce using rule 7 (expresion -> e0 .)
+    $end            reduce using rule 7 (expresion -> e0 .)
+    KET             reduce using rule 7 (expresion -> e0 .)
+    BRA             reduce using rule 7 (expresion -> e0 .)
+    ID              reduce using rule 7 (expresion -> e0 .)
+    CKET            reduce using rule 7 (expresion -> e0 .)
+    CBRA            reduce using rule 7 (expresion -> e0 .)
+    ADD             shift and go to state 27
+    SUB             shift and go to state 28
 
 
 state 6
 
-    (2) line -> rl NL .
+    (8) expresion -> assign .
 
-    $end            reduce using rule 2 (line -> rl NL .)
+    NL              reduce using rule 8 (expresion -> assign .)
+    $end            reduce using rule 8 (expresion -> assign .)
+    KET             reduce using rule 8 (expresion -> assign .)
+    BRA             reduce using rule 8 (expresion -> assign .)
+    ID              reduce using rule 8 (expresion -> assign .)
+    CKET            reduce using rule 8 (expresion -> assign .)
+    CBRA            reduce using rule 8 (expresion -> assign .)
 
 
 state 7
 
-    (3) rl -> rl ADD . rq
-    (6) rq -> . ket bra
-    (7) ket -> . KET
+    (18) e0 -> e1 .
 
-    KET             shift and go to state 5
+    ADD             reduce using rule 18 (e0 -> e1 .)
+    SUB             reduce using rule 18 (e0 -> e1 .)
+    NL              reduce using rule 18 (e0 -> e1 .)
+    $end            reduce using rule 18 (e0 -> e1 .)
+    KET             reduce using rule 18 (e0 -> e1 .)
+    BRA             reduce using rule 18 (e0 -> e1 .)
+    ID              reduce using rule 18 (e0 -> e1 .)
+    CKET            reduce using rule 18 (e0 -> e1 .)
+    CBRA            reduce using rule 18 (e0 -> e1 .)
 
-    rq                             shift and go to state 11
-    ket                            shift and go to state 4
 
 state 8
 
-    (4) rl -> rl SUB . rq
-    (6) rq -> . ket bra
-    (7) ket -> . KET
+    (9) assign -> des . ASSIGN e0
 
-    KET             shift and go to state 5
+    ASSIGN          shift and go to state 29
 
-    rq                             shift and go to state 12
-    ket                            shift and go to state 4
 
 state 9
 
-    (6) rq -> ket bra .
+    (19) e1 -> ket . bra
+    (21) e2 -> ket .
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
 
-    NL              reduce using rule 6 (rq -> ket bra .)
-    ADD             reduce using rule 6 (rq -> ket bra .)
-    SUB             reduce using rule 6 (rq -> ket bra .)
-    $end            reduce using rule 6 (rq -> ket bra .)
+  ! shift/reduce conflict for BRA resolved as shift
+  ! shift/reduce conflict for CBRA resolved as shift
+    ADD             reduce using rule 21 (e2 -> ket .)
+    SUB             reduce using rule 21 (e2 -> ket .)
+    NL              reduce using rule 21 (e2 -> ket .)
+    $end            reduce using rule 21 (e2 -> ket .)
+    KET             reduce using rule 21 (e2 -> ket .)
+    ID              reduce using rule 21 (e2 -> ket .)
+    CKET            reduce using rule 21 (e2 -> ket .)
+    BRA             shift and go to state 31
+    CBRA            shift and go to state 24
 
+  ! BRA             [ reduce using rule 21 (e2 -> ket .) ]
+  ! CBRA            [ reduce using rule 21 (e2 -> ket .) ]
+
+    bra                            shift and go to state 30
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
 
 state 10
 
-    (8) bra -> BRA .
+    (22) e2 -> bra .
 
-    NL              reduce using rule 8 (bra -> BRA .)
-    ADD             reduce using rule 8 (bra -> BRA .)
-    SUB             reduce using rule 8 (bra -> BRA .)
-    $end            reduce using rule 8 (bra -> BRA .)
+    ADD             reduce using rule 22 (e2 -> bra .)
+    SUB             reduce using rule 22 (e2 -> bra .)
+    NL              reduce using rule 22 (e2 -> bra .)
+    $end            reduce using rule 22 (e2 -> bra .)
+    KET             reduce using rule 22 (e2 -> bra .)
+    BRA             reduce using rule 22 (e2 -> bra .)
+    ID              reduce using rule 22 (e2 -> bra .)
+    CKET            reduce using rule 22 (e2 -> bra .)
+    CBRA            reduce using rule 22 (e2 -> bra .)
 
 
 state 11
 
-    (3) rl -> rl ADD rq .
+    (20) e1 -> e2 .
 
-    NL              reduce using rule 3 (rl -> rl ADD rq .)
-    ADD             reduce using rule 3 (rl -> rl ADD rq .)
-    SUB             reduce using rule 3 (rl -> rl ADD rq .)
-    $end            reduce using rule 3 (rl -> rl ADD rq .)
+    ADD             reduce using rule 20 (e1 -> e2 .)
+    SUB             reduce using rule 20 (e1 -> e2 .)
+    NL              reduce using rule 20 (e1 -> e2 .)
+    $end            reduce using rule 20 (e1 -> e2 .)
+    KET             reduce using rule 20 (e1 -> e2 .)
+    BRA             reduce using rule 20 (e1 -> e2 .)
+    ID              reduce using rule 20 (e1 -> e2 .)
+    CKET            reduce using rule 20 (e1 -> e2 .)
+    CBRA            reduce using rule 20 (e1 -> e2 .)
 
 
 state 12
 
-    (4) rl -> rl SUB rq .
+    (10) des -> ket_des .
 
-    NL              reduce using rule 4 (rl -> rl SUB rq .)
-    ADD             reduce using rule 4 (rl -> rl SUB rq .)
-    SUB             reduce using rule 4 (rl -> rl SUB rq .)
-    $end            reduce using rule 4 (rl -> rl SUB rq .)
+    ASSIGN          reduce using rule 10 (des -> ket_des .)
 
+
+state 13
+
+    (11) des -> bra_des .
+
+    ASSIGN          reduce using rule 11 (des -> bra_des .)
+
+
+state 14
+
+    (12) des -> id_des .
+
+    ASSIGN          reduce using rule 12 (des -> id_des .)
+
+
+state 15
+
+    (24) ket -> ketv .
+
+    BRA             reduce using rule 24 (ket -> ketv .)
+    CBRA            reduce using rule 24 (ket -> ketv .)
+    ADD             reduce using rule 24 (ket -> ketv .)
+    SUB             reduce using rule 24 (ket -> ketv .)
+    NL              reduce using rule 24 (ket -> ketv .)
+    $end            reduce using rule 24 (ket -> ketv .)
+    KET             reduce using rule 24 (ket -> ketv .)
+    ID              reduce using rule 24 (ket -> ketv .)
+    CKET            reduce using rule 24 (ket -> ketv .)
+
+
+state 16
+
+    (25) ket -> cket .
+
+    BRA             reduce using rule 25 (ket -> cket .)
+    CBRA            reduce using rule 25 (ket -> cket .)
+    ADD             reduce using rule 25 (ket -> cket .)
+    SUB             reduce using rule 25 (ket -> cket .)
+    NL              reduce using rule 25 (ket -> cket .)
+    $end            reduce using rule 25 (ket -> cket .)
+    KET             reduce using rule 25 (ket -> cket .)
+    ID              reduce using rule 25 (ket -> cket .)
+    CKET            reduce using rule 25 (ket -> cket .)
+
+
+state 17
+
+    (23) e2 -> id .
+
+    ADD             reduce using rule 23 (e2 -> id .)
+    SUB             reduce using rule 23 (e2 -> id .)
+    NL              reduce using rule 23 (e2 -> id .)
+    $end            reduce using rule 23 (e2 -> id .)
+    KET             reduce using rule 23 (e2 -> id .)
+    BRA             reduce using rule 23 (e2 -> id .)
+    ID              reduce using rule 23 (e2 -> id .)
+    CKET            reduce using rule 23 (e2 -> id .)
+    CBRA            reduce using rule 23 (e2 -> id .)
+
+
+state 18
+
+    (13) ket_des -> KET .
+    (30) ketv -> KET .
+
+    ASSIGN          reduce using rule 13 (ket_des -> KET .)
+    BRA             reduce using rule 30 (ketv -> KET .)
+    CBRA            reduce using rule 30 (ketv -> KET .)
+    ADD             reduce using rule 30 (ketv -> KET .)
+    SUB             reduce using rule 30 (ketv -> KET .)
+    NL              reduce using rule 30 (ketv -> KET .)
+    $end            reduce using rule 30 (ketv -> KET .)
+    KET             reduce using rule 30 (ketv -> KET .)
+    ID              reduce using rule 30 (ketv -> KET .)
+    CKET            reduce using rule 30 (ketv -> KET .)
+
+
+state 19
+
+    (14) bra_des -> BRA .
+    (31) brav -> BRA .
+
+    ASSIGN          reduce using rule 14 (bra_des -> BRA .)
+    ADD             reduce using rule 31 (brav -> BRA .)
+    SUB             reduce using rule 31 (brav -> BRA .)
+    NL              reduce using rule 31 (brav -> BRA .)
+    $end            reduce using rule 31 (brav -> BRA .)
+    KET             reduce using rule 31 (brav -> BRA .)
+    BRA             reduce using rule 31 (brav -> BRA .)
+    ID              reduce using rule 31 (brav -> BRA .)
+    CKET            reduce using rule 31 (brav -> BRA .)
+    CBRA            reduce using rule 31 (brav -> BRA .)
+
+
+state 20
+
+    (15) id_des -> ID .
+    (32) id -> ID .
+
+    ASSIGN          reduce using rule 15 (id_des -> ID .)
+    ADD             reduce using rule 32 (id -> ID .)
+    SUB             reduce using rule 32 (id -> ID .)
+    NL              reduce using rule 32 (id -> ID .)
+    $end            reduce using rule 32 (id -> ID .)
+    KET             reduce using rule 32 (id -> ID .)
+    BRA             reduce using rule 32 (id -> ID .)
+    ID              reduce using rule 32 (id -> ID .)
+    CKET            reduce using rule 32 (id -> ID .)
+    CBRA            reduce using rule 32 (id -> ID .)
+
+
+state 21
+
+    (28) cket -> CKET .
+
+    BRA             reduce using rule 28 (cket -> CKET .)
+    CBRA            reduce using rule 28 (cket -> CKET .)
+    ADD             reduce using rule 28 (cket -> CKET .)
+    SUB             reduce using rule 28 (cket -> CKET .)
+    NL              reduce using rule 28 (cket -> CKET .)
+    $end            reduce using rule 28 (cket -> CKET .)
+    KET             reduce using rule 28 (cket -> CKET .)
+    ID              reduce using rule 28 (cket -> CKET .)
+    CKET            reduce using rule 28 (cket -> CKET .)
+
+
+state 22
+
+    (26) bra -> brav .
+
+    ADD             reduce using rule 26 (bra -> brav .)
+    SUB             reduce using rule 26 (bra -> brav .)
+    NL              reduce using rule 26 (bra -> brav .)
+    $end            reduce using rule 26 (bra -> brav .)
+    KET             reduce using rule 26 (bra -> brav .)
+    BRA             reduce using rule 26 (bra -> brav .)
+    ID              reduce using rule 26 (bra -> brav .)
+    CKET            reduce using rule 26 (bra -> brav .)
+    CBRA            reduce using rule 26 (bra -> brav .)
+
+
+state 23
+
+    (27) bra -> cbra .
+
+    ADD             reduce using rule 27 (bra -> cbra .)
+    SUB             reduce using rule 27 (bra -> cbra .)
+    NL              reduce using rule 27 (bra -> cbra .)
+    $end            reduce using rule 27 (bra -> cbra .)
+    KET             reduce using rule 27 (bra -> cbra .)
+    BRA             reduce using rule 27 (bra -> cbra .)
+    ID              reduce using rule 27 (bra -> cbra .)
+    CKET            reduce using rule 27 (bra -> cbra .)
+    CBRA            reduce using rule 27 (bra -> cbra .)
+
+
+state 24
+
+    (29) cbra -> CBRA .
+
+    ADD             reduce using rule 29 (cbra -> CBRA .)
+    SUB             reduce using rule 29 (cbra -> CBRA .)
+    NL              reduce using rule 29 (cbra -> CBRA .)
+    $end            reduce using rule 29 (cbra -> CBRA .)
+    KET             reduce using rule 29 (cbra -> CBRA .)
+    BRA             reduce using rule 29 (cbra -> CBRA .)
+    ID              reduce using rule 29 (cbra -> CBRA .)
+    CKET            reduce using rule 29 (cbra -> CBRA .)
+    CBRA            reduce using rule 29 (cbra -> CBRA .)
+
+
+state 25
+
+    (1) program -> lines line .
+    (5) lines -> lines line .
+
+    $end            reduce using rule 1 (program -> lines line .)
+    KET             reduce using rule 5 (lines -> lines line .)
+    BRA             reduce using rule 5 (lines -> lines line .)
+    ID              reduce using rule 5 (lines -> lines line .)
+    CKET            reduce using rule 5 (lines -> lines line .)
+    CBRA            reduce using rule 5 (lines -> lines line .)
+
+
+state 26
+
+    (4) line -> expresion NL .
+
+    $end            reduce using rule 4 (line -> expresion NL .)
+    KET             reduce using rule 4 (line -> expresion NL .)
+    BRA             reduce using rule 4 (line -> expresion NL .)
+    ID              reduce using rule 4 (line -> expresion NL .)
+    CKET            reduce using rule 4 (line -> expresion NL .)
+    CBRA            reduce using rule 4 (line -> expresion NL .)
+
+
+state 27
+
+    (16) e0 -> e0 ADD . e1
+    (19) e1 -> . ket bra
+    (20) e1 -> . e2
+    (24) ket -> . ketv
+    (25) ket -> . cket
+    (21) e2 -> . ket
+    (22) e2 -> . bra
+    (23) e2 -> . id
+    (30) ketv -> . KET
+    (28) cket -> . CKET
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (32) id -> . ID
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
+
+    KET             shift and go to state 33
+    CKET            shift and go to state 21
+    ID              shift and go to state 34
+    BRA             shift and go to state 31
+    CBRA            shift and go to state 24
+
+    e1                             shift and go to state 32
+    ket                            shift and go to state 9
+    bra                            shift and go to state 10
+    e2                             shift and go to state 11
+    ketv                           shift and go to state 15
+    cket                           shift and go to state 16
+    id                             shift and go to state 17
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
+
+state 28
+
+    (17) e0 -> e0 SUB . e1
+    (19) e1 -> . ket bra
+    (20) e1 -> . e2
+    (24) ket -> . ketv
+    (25) ket -> . cket
+    (21) e2 -> . ket
+    (22) e2 -> . bra
+    (23) e2 -> . id
+    (30) ketv -> . KET
+    (28) cket -> . CKET
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (32) id -> . ID
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
+
+    KET             shift and go to state 33
+    CKET            shift and go to state 21
+    ID              shift and go to state 34
+    BRA             shift and go to state 31
+    CBRA            shift and go to state 24
+
+    e1                             shift and go to state 35
+    ket                            shift and go to state 9
+    bra                            shift and go to state 10
+    e2                             shift and go to state 11
+    ketv                           shift and go to state 15
+    cket                           shift and go to state 16
+    id                             shift and go to state 17
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
+
+state 29
+
+    (9) assign -> des ASSIGN . e0
+    (16) e0 -> . e0 ADD e1
+    (17) e0 -> . e0 SUB e1
+    (18) e0 -> . e1
+    (19) e1 -> . ket bra
+    (20) e1 -> . e2
+    (24) ket -> . ketv
+    (25) ket -> . cket
+    (21) e2 -> . ket
+    (22) e2 -> . bra
+    (23) e2 -> . id
+    (30) ketv -> . KET
+    (28) cket -> . CKET
+    (26) bra -> . brav
+    (27) bra -> . cbra
+    (32) id -> . ID
+    (31) brav -> . BRA
+    (29) cbra -> . CBRA
+
+    KET             shift and go to state 33
+    CKET            shift and go to state 21
+    ID              shift and go to state 34
+    BRA             shift and go to state 31
+    CBRA            shift and go to state 24
+
+    e0                             shift and go to state 36
+    e1                             shift and go to state 7
+    ket                            shift and go to state 9
+    bra                            shift and go to state 10
+    e2                             shift and go to state 11
+    ketv                           shift and go to state 15
+    cket                           shift and go to state 16
+    id                             shift and go to state 17
+    brav                           shift and go to state 22
+    cbra                           shift and go to state 23
+
+state 30
+
+    (19) e1 -> ket bra .
+
+    ADD             reduce using rule 19 (e1 -> ket bra .)
+    SUB             reduce using rule 19 (e1 -> ket bra .)
+    NL              reduce using rule 19 (e1 -> ket bra .)
+    $end            reduce using rule 19 (e1 -> ket bra .)
+    KET             reduce using rule 19 (e1 -> ket bra .)
+    BRA             reduce using rule 19 (e1 -> ket bra .)
+    ID              reduce using rule 19 (e1 -> ket bra .)
+    CKET            reduce using rule 19 (e1 -> ket bra .)
+    CBRA            reduce using rule 19 (e1 -> ket bra .)
+
+
+state 31
+
+    (31) brav -> BRA .
+
+    ADD             reduce using rule 31 (brav -> BRA .)
+    SUB             reduce using rule 31 (brav -> BRA .)
+    NL              reduce using rule 31 (brav -> BRA .)
+    $end            reduce using rule 31 (brav -> BRA .)
+    KET             reduce using rule 31 (brav -> BRA .)
+    BRA             reduce using rule 31 (brav -> BRA .)
+    ID              reduce using rule 31 (brav -> BRA .)
+    CKET            reduce using rule 31 (brav -> BRA .)
+    CBRA            reduce using rule 31 (brav -> BRA .)
+
+
+state 32
+
+    (16) e0 -> e0 ADD e1 .
+
+    ADD             reduce using rule 16 (e0 -> e0 ADD e1 .)
+    SUB             reduce using rule 16 (e0 -> e0 ADD e1 .)
+    NL              reduce using rule 16 (e0 -> e0 ADD e1 .)
+    $end            reduce using rule 16 (e0 -> e0 ADD e1 .)
+    KET             reduce using rule 16 (e0 -> e0 ADD e1 .)
+    BRA             reduce using rule 16 (e0 -> e0 ADD e1 .)
+    ID              reduce using rule 16 (e0 -> e0 ADD e1 .)
+    CKET            reduce using rule 16 (e0 -> e0 ADD e1 .)
+    CBRA            reduce using rule 16 (e0 -> e0 ADD e1 .)
+
+
+state 33
+
+    (30) ketv -> KET .
+
+    BRA             reduce using rule 30 (ketv -> KET .)
+    CBRA            reduce using rule 30 (ketv -> KET .)
+    ADD             reduce using rule 30 (ketv -> KET .)
+    SUB             reduce using rule 30 (ketv -> KET .)
+    NL              reduce using rule 30 (ketv -> KET .)
+    $end            reduce using rule 30 (ketv -> KET .)
+    KET             reduce using rule 30 (ketv -> KET .)
+    ID              reduce using rule 30 (ketv -> KET .)
+    CKET            reduce using rule 30 (ketv -> KET .)
+
+
+state 34
+
+    (32) id -> ID .
+
+    ADD             reduce using rule 32 (id -> ID .)
+    SUB             reduce using rule 32 (id -> ID .)
+    NL              reduce using rule 32 (id -> ID .)
+    $end            reduce using rule 32 (id -> ID .)
+    KET             reduce using rule 32 (id -> ID .)
+    BRA             reduce using rule 32 (id -> ID .)
+    ID              reduce using rule 32 (id -> ID .)
+    CKET            reduce using rule 32 (id -> ID .)
+    CBRA            reduce using rule 32 (id -> ID .)
+
+
+state 35
+
+    (17) e0 -> e0 SUB e1 .
+
+    ADD             reduce using rule 17 (e0 -> e0 SUB e1 .)
+    SUB             reduce using rule 17 (e0 -> e0 SUB e1 .)
+    NL              reduce using rule 17 (e0 -> e0 SUB e1 .)
+    $end            reduce using rule 17 (e0 -> e0 SUB e1 .)
+    KET             reduce using rule 17 (e0 -> e0 SUB e1 .)
+    BRA             reduce using rule 17 (e0 -> e0 SUB e1 .)
+    ID              reduce using rule 17 (e0 -> e0 SUB e1 .)
+    CKET            reduce using rule 17 (e0 -> e0 SUB e1 .)
+    CBRA            reduce using rule 17 (e0 -> e0 SUB e1 .)
+
+
+state 36
+
+    (9) assign -> des ASSIGN e0 .
+    (16) e0 -> e0 . ADD e1
+    (17) e0 -> e0 . SUB e1
+
+    NL              reduce using rule 9 (assign -> des ASSIGN e0 .)
+    $end            reduce using rule 9 (assign -> des ASSIGN e0 .)
+    KET             reduce using rule 9 (assign -> des ASSIGN e0 .)
+    BRA             reduce using rule 9 (assign -> des ASSIGN e0 .)
+    ID              reduce using rule 9 (assign -> des ASSIGN e0 .)
+    CKET            reduce using rule 9 (assign -> des ASSIGN e0 .)
+    CBRA            reduce using rule 9 (assign -> des ASSIGN e0 .)
+    ADD             shift and go to state 27
+    SUB             shift and go to state 28
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for BRA in state 9 resolved as shift
+WARNING: shift/reduce conflict for CBRA in state 9 resolved as shift
