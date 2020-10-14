@@ -25,6 +25,18 @@ class link:
         for exp in expr.expr:
             exp.visit(self)
 
+    def visit_mult(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+    
+    def visit_div(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+
+    def visit_pow(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+
     def visit_cket(self, ket):
         pass
     
@@ -39,6 +51,16 @@ class link:
 
     def visit_id(self, des):
         des.link = self.tv[des.id]
+    
+    def visit_complex(self, comp):
+        comp.A.visit(self)
+        comp.exp.visit(self)
+    
+    def visit_number(self, numb):
+        pass
+
+    def visit_complex_number(self, numb):
+        pass
 
     def visit_ket_des(self, link):
         self.tv[link.id] = link
@@ -48,3 +70,4 @@ class link:
 
     def visit_id_des(self, link):
         self.tv[link.id] = link
+    

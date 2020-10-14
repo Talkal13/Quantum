@@ -2,6 +2,8 @@
 T_BRA = "T_BRA"
 T_KET = "T_KET"
 T_MATRIX = "T_MATRIX"
+T_COMPLEX = "T_COMPLEX"
+T_NUMBER = "T_NUMBER"
 
 class types:
 
@@ -15,30 +17,62 @@ class types:
     def visit_assign(self, assig):
         assig.des.visit(self)
         assig.expr.visit(self)
-        if (assig.des.type != assig.expr.type):
-            raise Exception("Types not equal") # TODO: Error system
+        # if (assig.des.type != assig.expr.type):
+        #     raise Exception("Types not equal") # TODO: Error system
 
     def visit_add(self, expr):
         for exp in expr.expr:
             exp.visit(self)
-        if (expr.expr[0].type != expr.expr[1].type):
-            raise Exception("Types not equal") #TODO
-        expr.type = expr.expr[0].type
+        # if (expr.expr[0].type != expr.expr[1].type and (expr.expr[0].type != T_NUMBER or expr.expr[1].type != T_COMPLEX)):
+        #     raise Exception("Types not equal") #TODO
+        expr.type = expr.expr[1].type
         
 
     def visit_sub(self, expr):
         for exp in expr.expr:
             exp.visit(self)
-        if (expr.expr[0].type != expr.expr[1].type):
-            raise Exception("Types not equal") #TODO
-        expr.type = expr.expr[0].type
+        # if (expr.expr[0].type != expr.expr[1].type or (expr.expr[0].type == T_NUMBER and expr.expr[1].type == T_COMPLEX)):
+        #     raise Exception("Types not equal") #TODO
+        expr.type = expr.expr[1].type
 
     def visit_dot(self, expr):
         for exp in expr.expr:
             exp.visit(self)
-        if (expr.expr[0].type != T_KET or expr.expr[1].type != T_BRA):
-            raise Exception("Type error") #TODO
+        # if (expr.expr[0].type != T_KET or expr.expr[1].type != T_BRA):
+        #     raise Exception("Type error") #TODO
         expr.type = T_MATRIX
+    
+    def visit_mult(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        # if (expr.expr[0].type != expr.expr[1].type):
+        #     raise Exception("Types not equal") #TODO
+        expr.type = expr.expr[0].type
+
+    def visit_div(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        # if (expr.expr[0].type != expr.expr[1].type):
+        #     raise Exception("Types not equal") #TODO
+        expr.type = expr.expr[0].type
+    
+    def visit_pow(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        # if (expr.expr[0].type != T_NUMBER or (expr.expr[1].type != T_COMPLEX or expr.expr[1].type != T_NUMBER)):
+        #     raise Exception("Type error") #TODO
+        expr.type = expr.expr[1].type
+
+    def visit_complex(self, comp):
+        comp.A.visit(self)
+        comp.exp.visit(self)
+        comp.type = T_COMPLEX
+    
+    def visit_number(self, numb):
+        numb.type = T_NUMBER
+
+    def visit_complex_number(self, comp):
+        comp.type = T_COMPLEX
 
     def visit_cket(self, ket):
         ket.type = T_KET

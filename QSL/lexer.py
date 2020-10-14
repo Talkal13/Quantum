@@ -1,7 +1,9 @@
 import ply.lex as lex
 
 reserved = {
-
+    'e':'E',
+    'i':'I',
+    'pi':'PI'
 }
 
 tokens = [
@@ -19,18 +21,26 @@ tokens = [
     'NUMBER',
     'NL',
     'CKET',
-    'CBRA'
+    'CBRA',
+    # Priority
+    'LPAR',
+    'RPAR',
+    'POW'
 ] + list(reserved.values())
 
 t_MULT = r'\*'
 t_ADD = r'\+'
 t_SUB = r'-'
 t_DIV = r'/'
-t_ASSIGN = r':='
+t_ASSIGN = r'='
+t_LPAR = r'\('
+t_RPAR = r'\)'
+t_POW = r'\^'
+
 
 def t_NUMBER(t):
-    r'[-+]?\d+(.\d+)?'
-    t.value = float(t.value)
+    r'\d+(\.\d+)?'
+    t.value = t.value
     return t
 
 def t_BRA(t):

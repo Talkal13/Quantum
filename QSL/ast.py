@@ -56,6 +56,25 @@ class subOp(bin_expr):
     def visit(self, visitor):
         return visitor.visit_sub(self)
 
+class multOp(bin_expr):
+    def visit(self, visitor):
+        return visitor.visit_mult(self)
+
+class divOp(bin_expr):
+    def visit(self, visitor):
+        return visitor.visit_div(self)
+
+class powOp(bin_expr):
+    def visit(self, visitor):
+        return visitor.visit_pow(self)
+
+class complex_expr:
+    def __init__(self, amplitude, exp):
+        self.A = amplitude
+        self.exp = exp
+    def visit(self, visitor):
+        return visitor.visit_complex(self)
+
 # Constants
 class cbra:
     def __init__(self, value):
@@ -68,6 +87,23 @@ class cket:
         self.value = generate_qubit(int(value)).T
     def visit(self, visitor):
         return visitor.visit_cket(self)
+
+
+class number:
+    def __init__(self, value):
+        self.str = value
+        self.type = None
+    def visit(self, visitor):
+        return visitor.visit_number(self)
+
+class complex_number:
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imag = imaginary
+        self.type = None
+    def visit(self, visitor):
+        return visitor.visit_complex_number(self)
+
 
 
 
