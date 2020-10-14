@@ -1,7 +1,8 @@
 from math import sin, cos, pow, pi, e
 from cmath import exp
 from ast import number
-from .types import T_COMPLEX
+from .types import T_COMPLEX, T_MATRIX, T_KET
+import numpy as np
 
 class execute:
 
@@ -43,7 +44,10 @@ class execute:
     def visit_mult(self, expr):
         for exp in expr.expr:
             exp.visit(self)
-        expr.value = expr.expr[0].value * expr.expr[1].value
+        if (expr[0].type == T_MATRIX and expr[1].type == T_KET):
+            expr.value = expr[0].value.dot(expr.expr[1].value)
+        else:
+            expr.value = expr.expr[0].value * expr.expr[1].value
     
     def visit_div(self, expr):
         for exp in expr.expr:
@@ -60,6 +64,12 @@ class execute:
             expr.value = e ** comp
         else:
             expr.value = pow(expr.expr[0].value, expr.expr[1].value)
+    
+    def visit_inner(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        expr.value = expr.expr[0].value.dot(expr.expr[1].value)[0][0]
+        
 
     def visit_complex(self, comp):
         comp.A.visit(self)

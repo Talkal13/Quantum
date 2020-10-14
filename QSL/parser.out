@@ -23,82 +23,87 @@ Rule 17    e0 -> e0 SUB e1
 Rule 18    e0 -> e1
 Rule 19    e1 -> e1 MULT e2
 Rule 20    e1 -> e1 DIV e2
-Rule 21    e1 -> ket bra
+Rule 21    e1 -> e2 ket
 Rule 22    e1 -> e2
-Rule 23    e2 -> e3 POW e3
-Rule 24    e2 -> e3
-Rule 25    e3 -> ket
-Rule 26    e3 -> bra
-Rule 27    e3 -> pi
-Rule 28    e3 -> id
-Rule 29    e3 -> i
-Rule 30    e3 -> e
-Rule 31    e3 -> number
-Rule 32    e3 -> LPAR e0 RPAR
-Rule 33    ket -> ketv
-Rule 34    ket -> cket
-Rule 35    bra -> brav
-Rule 36    bra -> cbra
-Rule 37    complex -> E POW LPAR e0 RPAR
-Rule 38    cket -> CKET
-Rule 39    cbra -> CBRA
-Rule 40    number -> NUMBER
-Rule 41    i -> I
-Rule 42    i -> NUMBER I
-Rule 43    e -> E
-Rule 44    pi -> PI
-Rule 45    ketv -> KET
-Rule 46    brav -> BRA
-Rule 47    id -> ID
+Rule 23    e2 -> ket bra
+Rule 24    e2 -> inprod
+Rule 25    e2 -> e3
+Rule 26    e3 -> e4 POW e4
+Rule 27    e3 -> e4
+Rule 28    e4 -> ket
+Rule 29    e4 -> bra
+Rule 30    e4 -> pi
+Rule 31    e4 -> id
+Rule 32    e4 -> i
+Rule 33    e4 -> e
+Rule 34    e4 -> number
+Rule 35    e4 -> LPAR e0 RPAR
+Rule 36    ket -> ketv
+Rule 37    ket -> cket
+Rule 38    bra -> brav
+Rule 39    bra -> cbra
+Rule 40    cket -> CKET
+Rule 41    cbra -> CBRA
+Rule 42    number -> NUMBER
+Rule 43    i -> I
+Rule 44    i -> NUMBER I
+Rule 45    e -> E
+Rule 46    pi -> PI
+Rule 47    inprod -> INPROD
+Rule 48    ketv -> KET
+Rule 49    brav -> BRA
+Rule 50    id -> ID
 
 Terminals, with rules where they appear
 
 ADD                  : 16
 ASSIGN               : 9
-BRA                  : 14 46
-CBRA                 : 39
-CKET                 : 38
+BRA                  : 14 49
+CBRA                 : 41
+CKET                 : 40
 DIV                  : 20
-E                    : 37 43
-I                    : 41 42
-ID                   : 15 47
-KET                  : 13 45
-LPAR                 : 32 37
+E                    : 45
+I                    : 43 44
+ID                   : 15 50
+INPROD               : 47
+KET                  : 13 48
+LPAR                 : 35
 MULT                 : 19
 NL                   : 4
-NUMBER               : 40 42
-PI                   : 44
-POW                  : 23 37
-RPAR                 : 32 37
+NUMBER               : 42 44
+PI                   : 46
+POW                  : 26
+RPAR                 : 35
 SUB                  : 17
 error                : 
 
 Nonterminals, with rules where they appear
 
 assign               : 8
-bra                  : 21 26
+bra                  : 23 29
 bra_des              : 11
-brav                 : 35
-cbra                 : 36
-cket                 : 34
-complex              : 
+brav                 : 38
+cbra                 : 39
+cket                 : 37
 des                  : 9
-e                    : 30
-e0                   : 7 9 16 17 32 37
+e                    : 33
+e0                   : 7 9 16 17 35
 e1                   : 16 17 18 19 20
-e2                   : 19 20 22
-e3                   : 23 23 24
+e2                   : 19 20 21 22
+e3                   : 25
+e4                   : 26 26 27
 expresion            : 3 4
-i                    : 29
-id                   : 28
+i                    : 32
+id                   : 31
 id_des               : 12
-ket                  : 21 25
+inprod               : 24
+ket                  : 21 23 28
 ket_des              : 10
-ketv                 : 33
+ketv                 : 36
 line                 : 1 2 5 6
 lines                : 1 5
-number               : 31
-pi                   : 27
+number               : 34
+pi                   : 30
 program              : 0
 
 Parsing method: LALR
@@ -120,49 +125,54 @@ state 0
     (9) assign -> . des ASSIGN e0
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
     (10) des -> . ket_des
     (11) des -> . bra_des
     (12) des -> . id_des
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
     (13) ket_des -> . KET
     (14) bra_des -> . BRA
     (15) id_des -> . ID
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
-    KET             shift and go to state 18
-    BRA             shift and go to state 19
-    ID              shift and go to state 20
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    CBRA            shift and go to state 34
+    KET             shift and go to state 17
+    BRA             shift and go to state 18
+    ID              shift and go to state 19
+    INPROD          shift and go to state 22
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    CBRA            shift and go to state 37
 
     program                        shift and go to state 1
     lines                          shift and go to state 2
@@ -174,20 +184,22 @@ state 0
     des                            shift and go to state 8
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ket_des                        shift and go to state 12
-    bra_des                        shift and go to state 13
-    id_des                         shift and go to state 14
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    ket_des                        shift and go to state 11
+    bra_des                        shift and go to state 12
+    id_des                         shift and go to state 13
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
 state 1
 
@@ -209,51 +221,56 @@ state 2
     (9) assign -> . des ASSIGN e0
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
     (10) des -> . ket_des
     (11) des -> . bra_des
     (12) des -> . id_des
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
     (13) ket_des -> . KET
     (14) bra_des -> . BRA
     (15) id_des -> . ID
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
-    KET             shift and go to state 18
-    BRA             shift and go to state 19
-    ID              shift and go to state 20
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    CBRA            shift and go to state 34
+    KET             shift and go to state 17
+    BRA             shift and go to state 18
+    ID              shift and go to state 19
+    INPROD          shift and go to state 22
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    CBRA            shift and go to state 37
 
-    line                           shift and go to state 35
+    line                           shift and go to state 38
     expresion                      shift and go to state 4
     e0                             shift and go to state 5
     assign                         shift and go to state 6
@@ -261,20 +278,22 @@ state 2
     des                            shift and go to state 8
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ket_des                        shift and go to state 12
-    bra_des                        shift and go to state 13
-    id_des                         shift and go to state 14
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    ket_des                        shift and go to state 11
+    bra_des                        shift and go to state 12
+    id_des                         shift and go to state 13
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
 state 3
 
@@ -285,6 +304,7 @@ state 3
     KET             reduce using rule 6 (lines -> line .)
     BRA             reduce using rule 6 (lines -> line .)
     ID              reduce using rule 6 (lines -> line .)
+    INPROD          reduce using rule 6 (lines -> line .)
     CKET            reduce using rule 6 (lines -> line .)
     LPAR            reduce using rule 6 (lines -> line .)
     PI              reduce using rule 6 (lines -> line .)
@@ -303,6 +323,7 @@ state 4
     KET             reduce using rule 3 (line -> expresion .)
     BRA             reduce using rule 3 (line -> expresion .)
     ID              reduce using rule 3 (line -> expresion .)
+    INPROD          reduce using rule 3 (line -> expresion .)
     CKET            reduce using rule 3 (line -> expresion .)
     LPAR            reduce using rule 3 (line -> expresion .)
     PI              reduce using rule 3 (line -> expresion .)
@@ -310,7 +331,7 @@ state 4
     NUMBER          reduce using rule 3 (line -> expresion .)
     E               reduce using rule 3 (line -> expresion .)
     CBRA            reduce using rule 3 (line -> expresion .)
-    NL              shift and go to state 36
+    NL              shift and go to state 39
 
 
 state 5
@@ -324,6 +345,7 @@ state 5
     KET             reduce using rule 7 (expresion -> e0 .)
     BRA             reduce using rule 7 (expresion -> e0 .)
     ID              reduce using rule 7 (expresion -> e0 .)
+    INPROD          reduce using rule 7 (expresion -> e0 .)
     CKET            reduce using rule 7 (expresion -> e0 .)
     LPAR            reduce using rule 7 (expresion -> e0 .)
     PI              reduce using rule 7 (expresion -> e0 .)
@@ -331,8 +353,8 @@ state 5
     NUMBER          reduce using rule 7 (expresion -> e0 .)
     E               reduce using rule 7 (expresion -> e0 .)
     CBRA            reduce using rule 7 (expresion -> e0 .)
-    ADD             shift and go to state 37
-    SUB             shift and go to state 38
+    ADD             shift and go to state 40
+    SUB             shift and go to state 41
 
 
 state 6
@@ -344,6 +366,7 @@ state 6
     KET             reduce using rule 8 (expresion -> assign .)
     BRA             reduce using rule 8 (expresion -> assign .)
     ID              reduce using rule 8 (expresion -> assign .)
+    INPROD          reduce using rule 8 (expresion -> assign .)
     CKET            reduce using rule 8 (expresion -> assign .)
     LPAR            reduce using rule 8 (expresion -> assign .)
     PI              reduce using rule 8 (expresion -> assign .)
@@ -366,6 +389,7 @@ state 7
     KET             reduce using rule 18 (e0 -> e1 .)
     BRA             reduce using rule 18 (e0 -> e1 .)
     ID              reduce using rule 18 (e0 -> e1 .)
+    INPROD          reduce using rule 18 (e0 -> e1 .)
     CKET            reduce using rule 18 (e0 -> e1 .)
     LPAR            reduce using rule 18 (e0 -> e1 .)
     PI              reduce using rule 18 (e0 -> e1 .)
@@ -374,31 +398,37 @@ state 7
     E               reduce using rule 18 (e0 -> e1 .)
     CBRA            reduce using rule 18 (e0 -> e1 .)
     RPAR            reduce using rule 18 (e0 -> e1 .)
-    MULT            shift and go to state 39
-    DIV             shift and go to state 40
+    MULT            shift and go to state 42
+    DIV             shift and go to state 43
 
 
 state 8
 
     (9) assign -> des . ASSIGN e0
 
-    ASSIGN          shift and go to state 41
+    ASSIGN          shift and go to state 44
 
 
 state 9
 
+    (21) e1 -> e2 . ket
     (22) e1 -> e2 .
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (48) ketv -> . KET
+    (40) cket -> . CKET
 
+  ! shift/reduce conflict for KET resolved as shift
+  ! shift/reduce conflict for CKET resolved as shift
     MULT            reduce using rule 22 (e1 -> e2 .)
     DIV             reduce using rule 22 (e1 -> e2 .)
     ADD             reduce using rule 22 (e1 -> e2 .)
     SUB             reduce using rule 22 (e1 -> e2 .)
     NL              reduce using rule 22 (e1 -> e2 .)
     $end            reduce using rule 22 (e1 -> e2 .)
-    KET             reduce using rule 22 (e1 -> e2 .)
     BRA             reduce using rule 22 (e1 -> e2 .)
     ID              reduce using rule 22 (e1 -> e2 .)
-    CKET            reduce using rule 22 (e1 -> e2 .)
+    INPROD          reduce using rule 22 (e1 -> e2 .)
     LPAR            reduce using rule 22 (e1 -> e2 .)
     PI              reduce using rule 22 (e1 -> e2 .)
     I               reduce using rule 22 (e1 -> e2 .)
@@ -406,617 +436,725 @@ state 9
     E               reduce using rule 22 (e1 -> e2 .)
     CBRA            reduce using rule 22 (e1 -> e2 .)
     RPAR            reduce using rule 22 (e1 -> e2 .)
+    KET             shift and go to state 46
+    CKET            shift and go to state 24
 
+  ! KET             [ reduce using rule 22 (e1 -> e2 .) ]
+  ! CKET            [ reduce using rule 22 (e1 -> e2 .) ]
+
+    ket                            shift and go to state 45
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
 
 state 10
 
-    (21) e1 -> ket . bra
-    (25) e3 -> ket .
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> ket . bra
+    (28) e4 -> ket .
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
   ! shift/reduce conflict for BRA resolved as shift
   ! shift/reduce conflict for CBRA resolved as shift
-    POW             reduce using rule 25 (e3 -> ket .)
-    MULT            reduce using rule 25 (e3 -> ket .)
-    DIV             reduce using rule 25 (e3 -> ket .)
-    ADD             reduce using rule 25 (e3 -> ket .)
-    SUB             reduce using rule 25 (e3 -> ket .)
-    NL              reduce using rule 25 (e3 -> ket .)
-    $end            reduce using rule 25 (e3 -> ket .)
-    KET             reduce using rule 25 (e3 -> ket .)
-    ID              reduce using rule 25 (e3 -> ket .)
-    CKET            reduce using rule 25 (e3 -> ket .)
-    LPAR            reduce using rule 25 (e3 -> ket .)
-    PI              reduce using rule 25 (e3 -> ket .)
-    I               reduce using rule 25 (e3 -> ket .)
-    NUMBER          reduce using rule 25 (e3 -> ket .)
-    E               reduce using rule 25 (e3 -> ket .)
-    RPAR            reduce using rule 25 (e3 -> ket .)
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    POW             reduce using rule 28 (e4 -> ket .)
+    KET             reduce using rule 28 (e4 -> ket .)
+    CKET            reduce using rule 28 (e4 -> ket .)
+    MULT            reduce using rule 28 (e4 -> ket .)
+    DIV             reduce using rule 28 (e4 -> ket .)
+    ADD             reduce using rule 28 (e4 -> ket .)
+    SUB             reduce using rule 28 (e4 -> ket .)
+    NL              reduce using rule 28 (e4 -> ket .)
+    $end            reduce using rule 28 (e4 -> ket .)
+    ID              reduce using rule 28 (e4 -> ket .)
+    INPROD          reduce using rule 28 (e4 -> ket .)
+    LPAR            reduce using rule 28 (e4 -> ket .)
+    PI              reduce using rule 28 (e4 -> ket .)
+    I               reduce using rule 28 (e4 -> ket .)
+    NUMBER          reduce using rule 28 (e4 -> ket .)
+    E               reduce using rule 28 (e4 -> ket .)
+    RPAR            reduce using rule 28 (e4 -> ket .)
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-  ! BRA             [ reduce using rule 25 (e3 -> ket .) ]
-  ! CBRA            [ reduce using rule 25 (e3 -> ket .) ]
+  ! BRA             [ reduce using rule 28 (e4 -> ket .) ]
+  ! CBRA            [ reduce using rule 28 (e4 -> ket .) ]
 
-    bra                            shift and go to state 42
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    bra                            shift and go to state 47
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
 state 11
-
-    (26) e3 -> bra .
-
-    POW             reduce using rule 26 (e3 -> bra .)
-    MULT            reduce using rule 26 (e3 -> bra .)
-    DIV             reduce using rule 26 (e3 -> bra .)
-    ADD             reduce using rule 26 (e3 -> bra .)
-    SUB             reduce using rule 26 (e3 -> bra .)
-    NL              reduce using rule 26 (e3 -> bra .)
-    $end            reduce using rule 26 (e3 -> bra .)
-    KET             reduce using rule 26 (e3 -> bra .)
-    BRA             reduce using rule 26 (e3 -> bra .)
-    ID              reduce using rule 26 (e3 -> bra .)
-    CKET            reduce using rule 26 (e3 -> bra .)
-    LPAR            reduce using rule 26 (e3 -> bra .)
-    PI              reduce using rule 26 (e3 -> bra .)
-    I               reduce using rule 26 (e3 -> bra .)
-    NUMBER          reduce using rule 26 (e3 -> bra .)
-    E               reduce using rule 26 (e3 -> bra .)
-    CBRA            reduce using rule 26 (e3 -> bra .)
-    RPAR            reduce using rule 26 (e3 -> bra .)
-
-
-state 12
 
     (10) des -> ket_des .
 
     ASSIGN          reduce using rule 10 (des -> ket_des .)
 
 
-state 13
+state 12
 
     (11) des -> bra_des .
 
     ASSIGN          reduce using rule 11 (des -> bra_des .)
 
 
-state 14
+state 13
 
     (12) des -> id_des .
 
     ASSIGN          reduce using rule 12 (des -> id_des .)
 
 
+state 14
+
+    (29) e4 -> bra .
+
+    POW             reduce using rule 29 (e4 -> bra .)
+    KET             reduce using rule 29 (e4 -> bra .)
+    CKET            reduce using rule 29 (e4 -> bra .)
+    MULT            reduce using rule 29 (e4 -> bra .)
+    DIV             reduce using rule 29 (e4 -> bra .)
+    ADD             reduce using rule 29 (e4 -> bra .)
+    SUB             reduce using rule 29 (e4 -> bra .)
+    NL              reduce using rule 29 (e4 -> bra .)
+    $end            reduce using rule 29 (e4 -> bra .)
+    BRA             reduce using rule 29 (e4 -> bra .)
+    ID              reduce using rule 29 (e4 -> bra .)
+    INPROD          reduce using rule 29 (e4 -> bra .)
+    LPAR            reduce using rule 29 (e4 -> bra .)
+    PI              reduce using rule 29 (e4 -> bra .)
+    I               reduce using rule 29 (e4 -> bra .)
+    NUMBER          reduce using rule 29 (e4 -> bra .)
+    E               reduce using rule 29 (e4 -> bra .)
+    CBRA            reduce using rule 29 (e4 -> bra .)
+    RPAR            reduce using rule 29 (e4 -> bra .)
+
+
 state 15
 
-    (33) ket -> ketv .
+    (24) e2 -> inprod .
 
-    BRA             reduce using rule 33 (ket -> ketv .)
-    CBRA            reduce using rule 33 (ket -> ketv .)
-    POW             reduce using rule 33 (ket -> ketv .)
-    MULT            reduce using rule 33 (ket -> ketv .)
-    DIV             reduce using rule 33 (ket -> ketv .)
-    ADD             reduce using rule 33 (ket -> ketv .)
-    SUB             reduce using rule 33 (ket -> ketv .)
-    NL              reduce using rule 33 (ket -> ketv .)
-    $end            reduce using rule 33 (ket -> ketv .)
-    KET             reduce using rule 33 (ket -> ketv .)
-    ID              reduce using rule 33 (ket -> ketv .)
-    CKET            reduce using rule 33 (ket -> ketv .)
-    LPAR            reduce using rule 33 (ket -> ketv .)
-    PI              reduce using rule 33 (ket -> ketv .)
-    I               reduce using rule 33 (ket -> ketv .)
-    NUMBER          reduce using rule 33 (ket -> ketv .)
-    E               reduce using rule 33 (ket -> ketv .)
-    RPAR            reduce using rule 33 (ket -> ketv .)
+    KET             reduce using rule 24 (e2 -> inprod .)
+    CKET            reduce using rule 24 (e2 -> inprod .)
+    MULT            reduce using rule 24 (e2 -> inprod .)
+    DIV             reduce using rule 24 (e2 -> inprod .)
+    ADD             reduce using rule 24 (e2 -> inprod .)
+    SUB             reduce using rule 24 (e2 -> inprod .)
+    NL              reduce using rule 24 (e2 -> inprod .)
+    $end            reduce using rule 24 (e2 -> inprod .)
+    BRA             reduce using rule 24 (e2 -> inprod .)
+    ID              reduce using rule 24 (e2 -> inprod .)
+    INPROD          reduce using rule 24 (e2 -> inprod .)
+    LPAR            reduce using rule 24 (e2 -> inprod .)
+    PI              reduce using rule 24 (e2 -> inprod .)
+    I               reduce using rule 24 (e2 -> inprod .)
+    NUMBER          reduce using rule 24 (e2 -> inprod .)
+    E               reduce using rule 24 (e2 -> inprod .)
+    CBRA            reduce using rule 24 (e2 -> inprod .)
+    RPAR            reduce using rule 24 (e2 -> inprod .)
 
 
 state 16
 
-    (34) ket -> cket .
+    (25) e2 -> e3 .
 
-    BRA             reduce using rule 34 (ket -> cket .)
-    CBRA            reduce using rule 34 (ket -> cket .)
-    POW             reduce using rule 34 (ket -> cket .)
-    MULT            reduce using rule 34 (ket -> cket .)
-    DIV             reduce using rule 34 (ket -> cket .)
-    ADD             reduce using rule 34 (ket -> cket .)
-    SUB             reduce using rule 34 (ket -> cket .)
-    NL              reduce using rule 34 (ket -> cket .)
-    $end            reduce using rule 34 (ket -> cket .)
-    KET             reduce using rule 34 (ket -> cket .)
-    ID              reduce using rule 34 (ket -> cket .)
-    CKET            reduce using rule 34 (ket -> cket .)
-    LPAR            reduce using rule 34 (ket -> cket .)
-    PI              reduce using rule 34 (ket -> cket .)
-    I               reduce using rule 34 (ket -> cket .)
-    NUMBER          reduce using rule 34 (ket -> cket .)
-    E               reduce using rule 34 (ket -> cket .)
-    RPAR            reduce using rule 34 (ket -> cket .)
+    KET             reduce using rule 25 (e2 -> e3 .)
+    CKET            reduce using rule 25 (e2 -> e3 .)
+    MULT            reduce using rule 25 (e2 -> e3 .)
+    DIV             reduce using rule 25 (e2 -> e3 .)
+    ADD             reduce using rule 25 (e2 -> e3 .)
+    SUB             reduce using rule 25 (e2 -> e3 .)
+    NL              reduce using rule 25 (e2 -> e3 .)
+    $end            reduce using rule 25 (e2 -> e3 .)
+    BRA             reduce using rule 25 (e2 -> e3 .)
+    ID              reduce using rule 25 (e2 -> e3 .)
+    INPROD          reduce using rule 25 (e2 -> e3 .)
+    LPAR            reduce using rule 25 (e2 -> e3 .)
+    PI              reduce using rule 25 (e2 -> e3 .)
+    I               reduce using rule 25 (e2 -> e3 .)
+    NUMBER          reduce using rule 25 (e2 -> e3 .)
+    E               reduce using rule 25 (e2 -> e3 .)
+    CBRA            reduce using rule 25 (e2 -> e3 .)
+    RPAR            reduce using rule 25 (e2 -> e3 .)
 
 
 state 17
 
-    (23) e2 -> e3 . POW e3
-    (24) e2 -> e3 .
+    (13) ket_des -> KET .
+    (48) ketv -> KET .
 
-    POW             shift and go to state 44
-    MULT            reduce using rule 24 (e2 -> e3 .)
-    DIV             reduce using rule 24 (e2 -> e3 .)
-    ADD             reduce using rule 24 (e2 -> e3 .)
-    SUB             reduce using rule 24 (e2 -> e3 .)
-    NL              reduce using rule 24 (e2 -> e3 .)
-    $end            reduce using rule 24 (e2 -> e3 .)
-    KET             reduce using rule 24 (e2 -> e3 .)
-    BRA             reduce using rule 24 (e2 -> e3 .)
-    ID              reduce using rule 24 (e2 -> e3 .)
-    CKET            reduce using rule 24 (e2 -> e3 .)
-    LPAR            reduce using rule 24 (e2 -> e3 .)
-    PI              reduce using rule 24 (e2 -> e3 .)
-    I               reduce using rule 24 (e2 -> e3 .)
-    NUMBER          reduce using rule 24 (e2 -> e3 .)
-    E               reduce using rule 24 (e2 -> e3 .)
-    CBRA            reduce using rule 24 (e2 -> e3 .)
-    RPAR            reduce using rule 24 (e2 -> e3 .)
+    ASSIGN          reduce using rule 13 (ket_des -> KET .)
+    BRA             reduce using rule 48 (ketv -> KET .)
+    CBRA            reduce using rule 48 (ketv -> KET .)
+    POW             reduce using rule 48 (ketv -> KET .)
+    KET             reduce using rule 48 (ketv -> KET .)
+    CKET            reduce using rule 48 (ketv -> KET .)
+    MULT            reduce using rule 48 (ketv -> KET .)
+    DIV             reduce using rule 48 (ketv -> KET .)
+    ADD             reduce using rule 48 (ketv -> KET .)
+    SUB             reduce using rule 48 (ketv -> KET .)
+    NL              reduce using rule 48 (ketv -> KET .)
+    $end            reduce using rule 48 (ketv -> KET .)
+    ID              reduce using rule 48 (ketv -> KET .)
+    INPROD          reduce using rule 48 (ketv -> KET .)
+    LPAR            reduce using rule 48 (ketv -> KET .)
+    PI              reduce using rule 48 (ketv -> KET .)
+    I               reduce using rule 48 (ketv -> KET .)
+    NUMBER          reduce using rule 48 (ketv -> KET .)
+    E               reduce using rule 48 (ketv -> KET .)
 
 
 state 18
 
-    (13) ket_des -> KET .
-    (45) ketv -> KET .
+    (14) bra_des -> BRA .
+    (49) brav -> BRA .
 
-    ASSIGN          reduce using rule 13 (ket_des -> KET .)
-    BRA             reduce using rule 45 (ketv -> KET .)
-    CBRA            reduce using rule 45 (ketv -> KET .)
-    POW             reduce using rule 45 (ketv -> KET .)
-    MULT            reduce using rule 45 (ketv -> KET .)
-    DIV             reduce using rule 45 (ketv -> KET .)
-    ADD             reduce using rule 45 (ketv -> KET .)
-    SUB             reduce using rule 45 (ketv -> KET .)
-    NL              reduce using rule 45 (ketv -> KET .)
-    $end            reduce using rule 45 (ketv -> KET .)
-    KET             reduce using rule 45 (ketv -> KET .)
-    ID              reduce using rule 45 (ketv -> KET .)
-    CKET            reduce using rule 45 (ketv -> KET .)
-    LPAR            reduce using rule 45 (ketv -> KET .)
-    PI              reduce using rule 45 (ketv -> KET .)
-    I               reduce using rule 45 (ketv -> KET .)
-    NUMBER          reduce using rule 45 (ketv -> KET .)
-    E               reduce using rule 45 (ketv -> KET .)
+    ASSIGN          reduce using rule 14 (bra_des -> BRA .)
+    POW             reduce using rule 49 (brav -> BRA .)
+    KET             reduce using rule 49 (brav -> BRA .)
+    CKET            reduce using rule 49 (brav -> BRA .)
+    MULT            reduce using rule 49 (brav -> BRA .)
+    DIV             reduce using rule 49 (brav -> BRA .)
+    ADD             reduce using rule 49 (brav -> BRA .)
+    SUB             reduce using rule 49 (brav -> BRA .)
+    NL              reduce using rule 49 (brav -> BRA .)
+    $end            reduce using rule 49 (brav -> BRA .)
+    BRA             reduce using rule 49 (brav -> BRA .)
+    ID              reduce using rule 49 (brav -> BRA .)
+    INPROD          reduce using rule 49 (brav -> BRA .)
+    LPAR            reduce using rule 49 (brav -> BRA .)
+    PI              reduce using rule 49 (brav -> BRA .)
+    I               reduce using rule 49 (brav -> BRA .)
+    NUMBER          reduce using rule 49 (brav -> BRA .)
+    E               reduce using rule 49 (brav -> BRA .)
+    CBRA            reduce using rule 49 (brav -> BRA .)
 
 
 state 19
 
-    (14) bra_des -> BRA .
-    (46) brav -> BRA .
+    (15) id_des -> ID .
+    (50) id -> ID .
 
-    ASSIGN          reduce using rule 14 (bra_des -> BRA .)
-    POW             reduce using rule 46 (brav -> BRA .)
-    MULT            reduce using rule 46 (brav -> BRA .)
-    DIV             reduce using rule 46 (brav -> BRA .)
-    ADD             reduce using rule 46 (brav -> BRA .)
-    SUB             reduce using rule 46 (brav -> BRA .)
-    NL              reduce using rule 46 (brav -> BRA .)
-    $end            reduce using rule 46 (brav -> BRA .)
-    KET             reduce using rule 46 (brav -> BRA .)
-    BRA             reduce using rule 46 (brav -> BRA .)
-    ID              reduce using rule 46 (brav -> BRA .)
-    CKET            reduce using rule 46 (brav -> BRA .)
-    LPAR            reduce using rule 46 (brav -> BRA .)
-    PI              reduce using rule 46 (brav -> BRA .)
-    I               reduce using rule 46 (brav -> BRA .)
-    NUMBER          reduce using rule 46 (brav -> BRA .)
-    E               reduce using rule 46 (brav -> BRA .)
-    CBRA            reduce using rule 46 (brav -> BRA .)
+    ASSIGN          reduce using rule 15 (id_des -> ID .)
+    POW             reduce using rule 50 (id -> ID .)
+    KET             reduce using rule 50 (id -> ID .)
+    CKET            reduce using rule 50 (id -> ID .)
+    MULT            reduce using rule 50 (id -> ID .)
+    DIV             reduce using rule 50 (id -> ID .)
+    ADD             reduce using rule 50 (id -> ID .)
+    SUB             reduce using rule 50 (id -> ID .)
+    NL              reduce using rule 50 (id -> ID .)
+    $end            reduce using rule 50 (id -> ID .)
+    BRA             reduce using rule 50 (id -> ID .)
+    ID              reduce using rule 50 (id -> ID .)
+    INPROD          reduce using rule 50 (id -> ID .)
+    LPAR            reduce using rule 50 (id -> ID .)
+    PI              reduce using rule 50 (id -> ID .)
+    I               reduce using rule 50 (id -> ID .)
+    NUMBER          reduce using rule 50 (id -> ID .)
+    E               reduce using rule 50 (id -> ID .)
+    CBRA            reduce using rule 50 (id -> ID .)
 
 
 state 20
 
-    (15) id_des -> ID .
-    (47) id -> ID .
+    (36) ket -> ketv .
 
-    ASSIGN          reduce using rule 15 (id_des -> ID .)
-    POW             reduce using rule 47 (id -> ID .)
-    MULT            reduce using rule 47 (id -> ID .)
-    DIV             reduce using rule 47 (id -> ID .)
-    ADD             reduce using rule 47 (id -> ID .)
-    SUB             reduce using rule 47 (id -> ID .)
-    NL              reduce using rule 47 (id -> ID .)
-    $end            reduce using rule 47 (id -> ID .)
-    KET             reduce using rule 47 (id -> ID .)
-    BRA             reduce using rule 47 (id -> ID .)
-    ID              reduce using rule 47 (id -> ID .)
-    CKET            reduce using rule 47 (id -> ID .)
-    LPAR            reduce using rule 47 (id -> ID .)
-    PI              reduce using rule 47 (id -> ID .)
-    I               reduce using rule 47 (id -> ID .)
-    NUMBER          reduce using rule 47 (id -> ID .)
-    E               reduce using rule 47 (id -> ID .)
-    CBRA            reduce using rule 47 (id -> ID .)
+    BRA             reduce using rule 36 (ket -> ketv .)
+    CBRA            reduce using rule 36 (ket -> ketv .)
+    POW             reduce using rule 36 (ket -> ketv .)
+    KET             reduce using rule 36 (ket -> ketv .)
+    CKET            reduce using rule 36 (ket -> ketv .)
+    MULT            reduce using rule 36 (ket -> ketv .)
+    DIV             reduce using rule 36 (ket -> ketv .)
+    ADD             reduce using rule 36 (ket -> ketv .)
+    SUB             reduce using rule 36 (ket -> ketv .)
+    NL              reduce using rule 36 (ket -> ketv .)
+    $end            reduce using rule 36 (ket -> ketv .)
+    ID              reduce using rule 36 (ket -> ketv .)
+    INPROD          reduce using rule 36 (ket -> ketv .)
+    LPAR            reduce using rule 36 (ket -> ketv .)
+    PI              reduce using rule 36 (ket -> ketv .)
+    I               reduce using rule 36 (ket -> ketv .)
+    NUMBER          reduce using rule 36 (ket -> ketv .)
+    E               reduce using rule 36 (ket -> ketv .)
+    RPAR            reduce using rule 36 (ket -> ketv .)
 
 
 state 21
 
-    (38) cket -> CKET .
+    (37) ket -> cket .
 
-    BRA             reduce using rule 38 (cket -> CKET .)
-    CBRA            reduce using rule 38 (cket -> CKET .)
-    POW             reduce using rule 38 (cket -> CKET .)
-    MULT            reduce using rule 38 (cket -> CKET .)
-    DIV             reduce using rule 38 (cket -> CKET .)
-    ADD             reduce using rule 38 (cket -> CKET .)
-    SUB             reduce using rule 38 (cket -> CKET .)
-    NL              reduce using rule 38 (cket -> CKET .)
-    $end            reduce using rule 38 (cket -> CKET .)
-    KET             reduce using rule 38 (cket -> CKET .)
-    ID              reduce using rule 38 (cket -> CKET .)
-    CKET            reduce using rule 38 (cket -> CKET .)
-    LPAR            reduce using rule 38 (cket -> CKET .)
-    PI              reduce using rule 38 (cket -> CKET .)
-    I               reduce using rule 38 (cket -> CKET .)
-    NUMBER          reduce using rule 38 (cket -> CKET .)
-    E               reduce using rule 38 (cket -> CKET .)
-    RPAR            reduce using rule 38 (cket -> CKET .)
+    BRA             reduce using rule 37 (ket -> cket .)
+    CBRA            reduce using rule 37 (ket -> cket .)
+    POW             reduce using rule 37 (ket -> cket .)
+    KET             reduce using rule 37 (ket -> cket .)
+    CKET            reduce using rule 37 (ket -> cket .)
+    MULT            reduce using rule 37 (ket -> cket .)
+    DIV             reduce using rule 37 (ket -> cket .)
+    ADD             reduce using rule 37 (ket -> cket .)
+    SUB             reduce using rule 37 (ket -> cket .)
+    NL              reduce using rule 37 (ket -> cket .)
+    $end            reduce using rule 37 (ket -> cket .)
+    ID              reduce using rule 37 (ket -> cket .)
+    INPROD          reduce using rule 37 (ket -> cket .)
+    LPAR            reduce using rule 37 (ket -> cket .)
+    PI              reduce using rule 37 (ket -> cket .)
+    I               reduce using rule 37 (ket -> cket .)
+    NUMBER          reduce using rule 37 (ket -> cket .)
+    E               reduce using rule 37 (ket -> cket .)
+    RPAR            reduce using rule 37 (ket -> cket .)
 
 
 state 22
 
-    (27) e3 -> pi .
+    (47) inprod -> INPROD .
 
-    POW             reduce using rule 27 (e3 -> pi .)
-    MULT            reduce using rule 27 (e3 -> pi .)
-    DIV             reduce using rule 27 (e3 -> pi .)
-    ADD             reduce using rule 27 (e3 -> pi .)
-    SUB             reduce using rule 27 (e3 -> pi .)
-    NL              reduce using rule 27 (e3 -> pi .)
-    $end            reduce using rule 27 (e3 -> pi .)
-    KET             reduce using rule 27 (e3 -> pi .)
-    BRA             reduce using rule 27 (e3 -> pi .)
-    ID              reduce using rule 27 (e3 -> pi .)
-    CKET            reduce using rule 27 (e3 -> pi .)
-    LPAR            reduce using rule 27 (e3 -> pi .)
-    PI              reduce using rule 27 (e3 -> pi .)
-    I               reduce using rule 27 (e3 -> pi .)
-    NUMBER          reduce using rule 27 (e3 -> pi .)
-    E               reduce using rule 27 (e3 -> pi .)
-    CBRA            reduce using rule 27 (e3 -> pi .)
-    RPAR            reduce using rule 27 (e3 -> pi .)
+    KET             reduce using rule 47 (inprod -> INPROD .)
+    CKET            reduce using rule 47 (inprod -> INPROD .)
+    MULT            reduce using rule 47 (inprod -> INPROD .)
+    DIV             reduce using rule 47 (inprod -> INPROD .)
+    ADD             reduce using rule 47 (inprod -> INPROD .)
+    SUB             reduce using rule 47 (inprod -> INPROD .)
+    NL              reduce using rule 47 (inprod -> INPROD .)
+    $end            reduce using rule 47 (inprod -> INPROD .)
+    BRA             reduce using rule 47 (inprod -> INPROD .)
+    ID              reduce using rule 47 (inprod -> INPROD .)
+    INPROD          reduce using rule 47 (inprod -> INPROD .)
+    LPAR            reduce using rule 47 (inprod -> INPROD .)
+    PI              reduce using rule 47 (inprod -> INPROD .)
+    I               reduce using rule 47 (inprod -> INPROD .)
+    NUMBER          reduce using rule 47 (inprod -> INPROD .)
+    E               reduce using rule 47 (inprod -> INPROD .)
+    CBRA            reduce using rule 47 (inprod -> INPROD .)
+    RPAR            reduce using rule 47 (inprod -> INPROD .)
 
 
 state 23
 
-    (28) e3 -> id .
+    (26) e3 -> e4 . POW e4
+    (27) e3 -> e4 .
 
-    POW             reduce using rule 28 (e3 -> id .)
-    MULT            reduce using rule 28 (e3 -> id .)
-    DIV             reduce using rule 28 (e3 -> id .)
-    ADD             reduce using rule 28 (e3 -> id .)
-    SUB             reduce using rule 28 (e3 -> id .)
-    NL              reduce using rule 28 (e3 -> id .)
-    $end            reduce using rule 28 (e3 -> id .)
-    KET             reduce using rule 28 (e3 -> id .)
-    BRA             reduce using rule 28 (e3 -> id .)
-    ID              reduce using rule 28 (e3 -> id .)
-    CKET            reduce using rule 28 (e3 -> id .)
-    LPAR            reduce using rule 28 (e3 -> id .)
-    PI              reduce using rule 28 (e3 -> id .)
-    I               reduce using rule 28 (e3 -> id .)
-    NUMBER          reduce using rule 28 (e3 -> id .)
-    E               reduce using rule 28 (e3 -> id .)
-    CBRA            reduce using rule 28 (e3 -> id .)
-    RPAR            reduce using rule 28 (e3 -> id .)
+    POW             shift and go to state 49
+    KET             reduce using rule 27 (e3 -> e4 .)
+    CKET            reduce using rule 27 (e3 -> e4 .)
+    MULT            reduce using rule 27 (e3 -> e4 .)
+    DIV             reduce using rule 27 (e3 -> e4 .)
+    ADD             reduce using rule 27 (e3 -> e4 .)
+    SUB             reduce using rule 27 (e3 -> e4 .)
+    NL              reduce using rule 27 (e3 -> e4 .)
+    $end            reduce using rule 27 (e3 -> e4 .)
+    BRA             reduce using rule 27 (e3 -> e4 .)
+    ID              reduce using rule 27 (e3 -> e4 .)
+    INPROD          reduce using rule 27 (e3 -> e4 .)
+    LPAR            reduce using rule 27 (e3 -> e4 .)
+    PI              reduce using rule 27 (e3 -> e4 .)
+    I               reduce using rule 27 (e3 -> e4 .)
+    NUMBER          reduce using rule 27 (e3 -> e4 .)
+    E               reduce using rule 27 (e3 -> e4 .)
+    CBRA            reduce using rule 27 (e3 -> e4 .)
+    RPAR            reduce using rule 27 (e3 -> e4 .)
 
 
 state 24
 
-    (29) e3 -> i .
+    (40) cket -> CKET .
 
-    POW             reduce using rule 29 (e3 -> i .)
-    MULT            reduce using rule 29 (e3 -> i .)
-    DIV             reduce using rule 29 (e3 -> i .)
-    ADD             reduce using rule 29 (e3 -> i .)
-    SUB             reduce using rule 29 (e3 -> i .)
-    NL              reduce using rule 29 (e3 -> i .)
-    $end            reduce using rule 29 (e3 -> i .)
-    KET             reduce using rule 29 (e3 -> i .)
-    BRA             reduce using rule 29 (e3 -> i .)
-    ID              reduce using rule 29 (e3 -> i .)
-    CKET            reduce using rule 29 (e3 -> i .)
-    LPAR            reduce using rule 29 (e3 -> i .)
-    PI              reduce using rule 29 (e3 -> i .)
-    I               reduce using rule 29 (e3 -> i .)
-    NUMBER          reduce using rule 29 (e3 -> i .)
-    E               reduce using rule 29 (e3 -> i .)
-    CBRA            reduce using rule 29 (e3 -> i .)
-    RPAR            reduce using rule 29 (e3 -> i .)
+    BRA             reduce using rule 40 (cket -> CKET .)
+    CBRA            reduce using rule 40 (cket -> CKET .)
+    POW             reduce using rule 40 (cket -> CKET .)
+    KET             reduce using rule 40 (cket -> CKET .)
+    CKET            reduce using rule 40 (cket -> CKET .)
+    MULT            reduce using rule 40 (cket -> CKET .)
+    DIV             reduce using rule 40 (cket -> CKET .)
+    ADD             reduce using rule 40 (cket -> CKET .)
+    SUB             reduce using rule 40 (cket -> CKET .)
+    NL              reduce using rule 40 (cket -> CKET .)
+    $end            reduce using rule 40 (cket -> CKET .)
+    ID              reduce using rule 40 (cket -> CKET .)
+    INPROD          reduce using rule 40 (cket -> CKET .)
+    LPAR            reduce using rule 40 (cket -> CKET .)
+    PI              reduce using rule 40 (cket -> CKET .)
+    I               reduce using rule 40 (cket -> CKET .)
+    NUMBER          reduce using rule 40 (cket -> CKET .)
+    E               reduce using rule 40 (cket -> CKET .)
+    RPAR            reduce using rule 40 (cket -> CKET .)
 
 
 state 25
 
-    (30) e3 -> e .
+    (30) e4 -> pi .
 
-    POW             reduce using rule 30 (e3 -> e .)
-    MULT            reduce using rule 30 (e3 -> e .)
-    DIV             reduce using rule 30 (e3 -> e .)
-    ADD             reduce using rule 30 (e3 -> e .)
-    SUB             reduce using rule 30 (e3 -> e .)
-    NL              reduce using rule 30 (e3 -> e .)
-    $end            reduce using rule 30 (e3 -> e .)
-    KET             reduce using rule 30 (e3 -> e .)
-    BRA             reduce using rule 30 (e3 -> e .)
-    ID              reduce using rule 30 (e3 -> e .)
-    CKET            reduce using rule 30 (e3 -> e .)
-    LPAR            reduce using rule 30 (e3 -> e .)
-    PI              reduce using rule 30 (e3 -> e .)
-    I               reduce using rule 30 (e3 -> e .)
-    NUMBER          reduce using rule 30 (e3 -> e .)
-    E               reduce using rule 30 (e3 -> e .)
-    CBRA            reduce using rule 30 (e3 -> e .)
-    RPAR            reduce using rule 30 (e3 -> e .)
+    POW             reduce using rule 30 (e4 -> pi .)
+    KET             reduce using rule 30 (e4 -> pi .)
+    CKET            reduce using rule 30 (e4 -> pi .)
+    MULT            reduce using rule 30 (e4 -> pi .)
+    DIV             reduce using rule 30 (e4 -> pi .)
+    ADD             reduce using rule 30 (e4 -> pi .)
+    SUB             reduce using rule 30 (e4 -> pi .)
+    NL              reduce using rule 30 (e4 -> pi .)
+    $end            reduce using rule 30 (e4 -> pi .)
+    BRA             reduce using rule 30 (e4 -> pi .)
+    ID              reduce using rule 30 (e4 -> pi .)
+    INPROD          reduce using rule 30 (e4 -> pi .)
+    LPAR            reduce using rule 30 (e4 -> pi .)
+    PI              reduce using rule 30 (e4 -> pi .)
+    I               reduce using rule 30 (e4 -> pi .)
+    NUMBER          reduce using rule 30 (e4 -> pi .)
+    E               reduce using rule 30 (e4 -> pi .)
+    CBRA            reduce using rule 30 (e4 -> pi .)
+    RPAR            reduce using rule 30 (e4 -> pi .)
 
 
 state 26
 
-    (31) e3 -> number .
+    (31) e4 -> id .
 
-    POW             reduce using rule 31 (e3 -> number .)
-    MULT            reduce using rule 31 (e3 -> number .)
-    DIV             reduce using rule 31 (e3 -> number .)
-    ADD             reduce using rule 31 (e3 -> number .)
-    SUB             reduce using rule 31 (e3 -> number .)
-    NL              reduce using rule 31 (e3 -> number .)
-    $end            reduce using rule 31 (e3 -> number .)
-    KET             reduce using rule 31 (e3 -> number .)
-    BRA             reduce using rule 31 (e3 -> number .)
-    ID              reduce using rule 31 (e3 -> number .)
-    CKET            reduce using rule 31 (e3 -> number .)
-    LPAR            reduce using rule 31 (e3 -> number .)
-    PI              reduce using rule 31 (e3 -> number .)
-    I               reduce using rule 31 (e3 -> number .)
-    NUMBER          reduce using rule 31 (e3 -> number .)
-    E               reduce using rule 31 (e3 -> number .)
-    CBRA            reduce using rule 31 (e3 -> number .)
-    RPAR            reduce using rule 31 (e3 -> number .)
+    POW             reduce using rule 31 (e4 -> id .)
+    KET             reduce using rule 31 (e4 -> id .)
+    CKET            reduce using rule 31 (e4 -> id .)
+    MULT            reduce using rule 31 (e4 -> id .)
+    DIV             reduce using rule 31 (e4 -> id .)
+    ADD             reduce using rule 31 (e4 -> id .)
+    SUB             reduce using rule 31 (e4 -> id .)
+    NL              reduce using rule 31 (e4 -> id .)
+    $end            reduce using rule 31 (e4 -> id .)
+    BRA             reduce using rule 31 (e4 -> id .)
+    ID              reduce using rule 31 (e4 -> id .)
+    INPROD          reduce using rule 31 (e4 -> id .)
+    LPAR            reduce using rule 31 (e4 -> id .)
+    PI              reduce using rule 31 (e4 -> id .)
+    I               reduce using rule 31 (e4 -> id .)
+    NUMBER          reduce using rule 31 (e4 -> id .)
+    E               reduce using rule 31 (e4 -> id .)
+    CBRA            reduce using rule 31 (e4 -> id .)
+    RPAR            reduce using rule 31 (e4 -> id .)
 
 
 state 27
 
-    (32) e3 -> LPAR . e0 RPAR
+    (32) e4 -> i .
+
+    POW             reduce using rule 32 (e4 -> i .)
+    KET             reduce using rule 32 (e4 -> i .)
+    CKET            reduce using rule 32 (e4 -> i .)
+    MULT            reduce using rule 32 (e4 -> i .)
+    DIV             reduce using rule 32 (e4 -> i .)
+    ADD             reduce using rule 32 (e4 -> i .)
+    SUB             reduce using rule 32 (e4 -> i .)
+    NL              reduce using rule 32 (e4 -> i .)
+    $end            reduce using rule 32 (e4 -> i .)
+    BRA             reduce using rule 32 (e4 -> i .)
+    ID              reduce using rule 32 (e4 -> i .)
+    INPROD          reduce using rule 32 (e4 -> i .)
+    LPAR            reduce using rule 32 (e4 -> i .)
+    PI              reduce using rule 32 (e4 -> i .)
+    I               reduce using rule 32 (e4 -> i .)
+    NUMBER          reduce using rule 32 (e4 -> i .)
+    E               reduce using rule 32 (e4 -> i .)
+    CBRA            reduce using rule 32 (e4 -> i .)
+    RPAR            reduce using rule 32 (e4 -> i .)
+
+
+state 28
+
+    (33) e4 -> e .
+
+    POW             reduce using rule 33 (e4 -> e .)
+    KET             reduce using rule 33 (e4 -> e .)
+    CKET            reduce using rule 33 (e4 -> e .)
+    MULT            reduce using rule 33 (e4 -> e .)
+    DIV             reduce using rule 33 (e4 -> e .)
+    ADD             reduce using rule 33 (e4 -> e .)
+    SUB             reduce using rule 33 (e4 -> e .)
+    NL              reduce using rule 33 (e4 -> e .)
+    $end            reduce using rule 33 (e4 -> e .)
+    BRA             reduce using rule 33 (e4 -> e .)
+    ID              reduce using rule 33 (e4 -> e .)
+    INPROD          reduce using rule 33 (e4 -> e .)
+    LPAR            reduce using rule 33 (e4 -> e .)
+    PI              reduce using rule 33 (e4 -> e .)
+    I               reduce using rule 33 (e4 -> e .)
+    NUMBER          reduce using rule 33 (e4 -> e .)
+    E               reduce using rule 33 (e4 -> e .)
+    CBRA            reduce using rule 33 (e4 -> e .)
+    RPAR            reduce using rule 33 (e4 -> e .)
+
+
+state 29
+
+    (34) e4 -> number .
+
+    POW             reduce using rule 34 (e4 -> number .)
+    KET             reduce using rule 34 (e4 -> number .)
+    CKET            reduce using rule 34 (e4 -> number .)
+    MULT            reduce using rule 34 (e4 -> number .)
+    DIV             reduce using rule 34 (e4 -> number .)
+    ADD             reduce using rule 34 (e4 -> number .)
+    SUB             reduce using rule 34 (e4 -> number .)
+    NL              reduce using rule 34 (e4 -> number .)
+    $end            reduce using rule 34 (e4 -> number .)
+    BRA             reduce using rule 34 (e4 -> number .)
+    ID              reduce using rule 34 (e4 -> number .)
+    INPROD          reduce using rule 34 (e4 -> number .)
+    LPAR            reduce using rule 34 (e4 -> number .)
+    PI              reduce using rule 34 (e4 -> number .)
+    I               reduce using rule 34 (e4 -> number .)
+    NUMBER          reduce using rule 34 (e4 -> number .)
+    E               reduce using rule 34 (e4 -> number .)
+    CBRA            reduce using rule 34 (e4 -> number .)
+    RPAR            reduce using rule 34 (e4 -> number .)
+
+
+state 30
+
+    (35) e4 -> LPAR . e0 RPAR
     (16) e0 -> . e0 ADD e1
     (17) e0 -> . e0 SUB e1
     (18) e0 -> . e1
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e0                             shift and go to state 45
+    e0                             shift and go to state 50
     e1                             shift and go to state 7
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
-
-state 28
-
-    (35) bra -> brav .
-
-    POW             reduce using rule 35 (bra -> brav .)
-    MULT            reduce using rule 35 (bra -> brav .)
-    DIV             reduce using rule 35 (bra -> brav .)
-    ADD             reduce using rule 35 (bra -> brav .)
-    SUB             reduce using rule 35 (bra -> brav .)
-    NL              reduce using rule 35 (bra -> brav .)
-    $end            reduce using rule 35 (bra -> brav .)
-    KET             reduce using rule 35 (bra -> brav .)
-    BRA             reduce using rule 35 (bra -> brav .)
-    ID              reduce using rule 35 (bra -> brav .)
-    CKET            reduce using rule 35 (bra -> brav .)
-    LPAR            reduce using rule 35 (bra -> brav .)
-    PI              reduce using rule 35 (bra -> brav .)
-    I               reduce using rule 35 (bra -> brav .)
-    NUMBER          reduce using rule 35 (bra -> brav .)
-    E               reduce using rule 35 (bra -> brav .)
-    CBRA            reduce using rule 35 (bra -> brav .)
-    RPAR            reduce using rule 35 (bra -> brav .)
-
-
-state 29
-
-    (36) bra -> cbra .
-
-    POW             reduce using rule 36 (bra -> cbra .)
-    MULT            reduce using rule 36 (bra -> cbra .)
-    DIV             reduce using rule 36 (bra -> cbra .)
-    ADD             reduce using rule 36 (bra -> cbra .)
-    SUB             reduce using rule 36 (bra -> cbra .)
-    NL              reduce using rule 36 (bra -> cbra .)
-    $end            reduce using rule 36 (bra -> cbra .)
-    KET             reduce using rule 36 (bra -> cbra .)
-    BRA             reduce using rule 36 (bra -> cbra .)
-    ID              reduce using rule 36 (bra -> cbra .)
-    CKET            reduce using rule 36 (bra -> cbra .)
-    LPAR            reduce using rule 36 (bra -> cbra .)
-    PI              reduce using rule 36 (bra -> cbra .)
-    I               reduce using rule 36 (bra -> cbra .)
-    NUMBER          reduce using rule 36 (bra -> cbra .)
-    E               reduce using rule 36 (bra -> cbra .)
-    CBRA            reduce using rule 36 (bra -> cbra .)
-    RPAR            reduce using rule 36 (bra -> cbra .)
-
-
-state 30
-
-    (44) pi -> PI .
-
-    POW             reduce using rule 44 (pi -> PI .)
-    MULT            reduce using rule 44 (pi -> PI .)
-    DIV             reduce using rule 44 (pi -> PI .)
-    ADD             reduce using rule 44 (pi -> PI .)
-    SUB             reduce using rule 44 (pi -> PI .)
-    NL              reduce using rule 44 (pi -> PI .)
-    $end            reduce using rule 44 (pi -> PI .)
-    KET             reduce using rule 44 (pi -> PI .)
-    BRA             reduce using rule 44 (pi -> PI .)
-    ID              reduce using rule 44 (pi -> PI .)
-    CKET            reduce using rule 44 (pi -> PI .)
-    LPAR            reduce using rule 44 (pi -> PI .)
-    PI              reduce using rule 44 (pi -> PI .)
-    I               reduce using rule 44 (pi -> PI .)
-    NUMBER          reduce using rule 44 (pi -> PI .)
-    E               reduce using rule 44 (pi -> PI .)
-    CBRA            reduce using rule 44 (pi -> PI .)
-    RPAR            reduce using rule 44 (pi -> PI .)
-
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
 state 31
 
-    (41) i -> I .
+    (38) bra -> brav .
 
-    POW             reduce using rule 41 (i -> I .)
-    MULT            reduce using rule 41 (i -> I .)
-    DIV             reduce using rule 41 (i -> I .)
-    ADD             reduce using rule 41 (i -> I .)
-    SUB             reduce using rule 41 (i -> I .)
-    NL              reduce using rule 41 (i -> I .)
-    $end            reduce using rule 41 (i -> I .)
-    KET             reduce using rule 41 (i -> I .)
-    BRA             reduce using rule 41 (i -> I .)
-    ID              reduce using rule 41 (i -> I .)
-    CKET            reduce using rule 41 (i -> I .)
-    LPAR            reduce using rule 41 (i -> I .)
-    PI              reduce using rule 41 (i -> I .)
-    I               reduce using rule 41 (i -> I .)
-    NUMBER          reduce using rule 41 (i -> I .)
-    E               reduce using rule 41 (i -> I .)
-    CBRA            reduce using rule 41 (i -> I .)
-    RPAR            reduce using rule 41 (i -> I .)
+    POW             reduce using rule 38 (bra -> brav .)
+    KET             reduce using rule 38 (bra -> brav .)
+    CKET            reduce using rule 38 (bra -> brav .)
+    MULT            reduce using rule 38 (bra -> brav .)
+    DIV             reduce using rule 38 (bra -> brav .)
+    ADD             reduce using rule 38 (bra -> brav .)
+    SUB             reduce using rule 38 (bra -> brav .)
+    NL              reduce using rule 38 (bra -> brav .)
+    $end            reduce using rule 38 (bra -> brav .)
+    BRA             reduce using rule 38 (bra -> brav .)
+    ID              reduce using rule 38 (bra -> brav .)
+    INPROD          reduce using rule 38 (bra -> brav .)
+    LPAR            reduce using rule 38 (bra -> brav .)
+    PI              reduce using rule 38 (bra -> brav .)
+    I               reduce using rule 38 (bra -> brav .)
+    NUMBER          reduce using rule 38 (bra -> brav .)
+    E               reduce using rule 38 (bra -> brav .)
+    CBRA            reduce using rule 38 (bra -> brav .)
+    RPAR            reduce using rule 38 (bra -> brav .)
 
 
 state 32
 
-    (42) i -> NUMBER . I
-    (40) number -> NUMBER .
+    (39) bra -> cbra .
 
-  ! shift/reduce conflict for I resolved as shift
-    I               shift and go to state 48
-    POW             reduce using rule 40 (number -> NUMBER .)
-    MULT            reduce using rule 40 (number -> NUMBER .)
-    DIV             reduce using rule 40 (number -> NUMBER .)
-    ADD             reduce using rule 40 (number -> NUMBER .)
-    SUB             reduce using rule 40 (number -> NUMBER .)
-    NL              reduce using rule 40 (number -> NUMBER .)
-    $end            reduce using rule 40 (number -> NUMBER .)
-    KET             reduce using rule 40 (number -> NUMBER .)
-    BRA             reduce using rule 40 (number -> NUMBER .)
-    ID              reduce using rule 40 (number -> NUMBER .)
-    CKET            reduce using rule 40 (number -> NUMBER .)
-    LPAR            reduce using rule 40 (number -> NUMBER .)
-    PI              reduce using rule 40 (number -> NUMBER .)
-    NUMBER          reduce using rule 40 (number -> NUMBER .)
-    E               reduce using rule 40 (number -> NUMBER .)
-    CBRA            reduce using rule 40 (number -> NUMBER .)
-    RPAR            reduce using rule 40 (number -> NUMBER .)
-
-  ! I               [ reduce using rule 40 (number -> NUMBER .) ]
+    POW             reduce using rule 39 (bra -> cbra .)
+    KET             reduce using rule 39 (bra -> cbra .)
+    CKET            reduce using rule 39 (bra -> cbra .)
+    MULT            reduce using rule 39 (bra -> cbra .)
+    DIV             reduce using rule 39 (bra -> cbra .)
+    ADD             reduce using rule 39 (bra -> cbra .)
+    SUB             reduce using rule 39 (bra -> cbra .)
+    NL              reduce using rule 39 (bra -> cbra .)
+    $end            reduce using rule 39 (bra -> cbra .)
+    BRA             reduce using rule 39 (bra -> cbra .)
+    ID              reduce using rule 39 (bra -> cbra .)
+    INPROD          reduce using rule 39 (bra -> cbra .)
+    LPAR            reduce using rule 39 (bra -> cbra .)
+    PI              reduce using rule 39 (bra -> cbra .)
+    I               reduce using rule 39 (bra -> cbra .)
+    NUMBER          reduce using rule 39 (bra -> cbra .)
+    E               reduce using rule 39 (bra -> cbra .)
+    CBRA            reduce using rule 39 (bra -> cbra .)
+    RPAR            reduce using rule 39 (bra -> cbra .)
 
 
 state 33
 
-    (43) e -> E .
+    (46) pi -> PI .
 
-    POW             reduce using rule 43 (e -> E .)
-    MULT            reduce using rule 43 (e -> E .)
-    DIV             reduce using rule 43 (e -> E .)
-    ADD             reduce using rule 43 (e -> E .)
-    SUB             reduce using rule 43 (e -> E .)
-    NL              reduce using rule 43 (e -> E .)
-    $end            reduce using rule 43 (e -> E .)
-    KET             reduce using rule 43 (e -> E .)
-    BRA             reduce using rule 43 (e -> E .)
-    ID              reduce using rule 43 (e -> E .)
-    CKET            reduce using rule 43 (e -> E .)
-    LPAR            reduce using rule 43 (e -> E .)
-    PI              reduce using rule 43 (e -> E .)
-    I               reduce using rule 43 (e -> E .)
-    NUMBER          reduce using rule 43 (e -> E .)
-    E               reduce using rule 43 (e -> E .)
-    CBRA            reduce using rule 43 (e -> E .)
-    RPAR            reduce using rule 43 (e -> E .)
+    POW             reduce using rule 46 (pi -> PI .)
+    KET             reduce using rule 46 (pi -> PI .)
+    CKET            reduce using rule 46 (pi -> PI .)
+    MULT            reduce using rule 46 (pi -> PI .)
+    DIV             reduce using rule 46 (pi -> PI .)
+    ADD             reduce using rule 46 (pi -> PI .)
+    SUB             reduce using rule 46 (pi -> PI .)
+    NL              reduce using rule 46 (pi -> PI .)
+    $end            reduce using rule 46 (pi -> PI .)
+    BRA             reduce using rule 46 (pi -> PI .)
+    ID              reduce using rule 46 (pi -> PI .)
+    INPROD          reduce using rule 46 (pi -> PI .)
+    LPAR            reduce using rule 46 (pi -> PI .)
+    PI              reduce using rule 46 (pi -> PI .)
+    I               reduce using rule 46 (pi -> PI .)
+    NUMBER          reduce using rule 46 (pi -> PI .)
+    E               reduce using rule 46 (pi -> PI .)
+    CBRA            reduce using rule 46 (pi -> PI .)
+    RPAR            reduce using rule 46 (pi -> PI .)
 
 
 state 34
 
-    (39) cbra -> CBRA .
+    (43) i -> I .
 
-    POW             reduce using rule 39 (cbra -> CBRA .)
-    MULT            reduce using rule 39 (cbra -> CBRA .)
-    DIV             reduce using rule 39 (cbra -> CBRA .)
-    ADD             reduce using rule 39 (cbra -> CBRA .)
-    SUB             reduce using rule 39 (cbra -> CBRA .)
-    NL              reduce using rule 39 (cbra -> CBRA .)
-    $end            reduce using rule 39 (cbra -> CBRA .)
-    KET             reduce using rule 39 (cbra -> CBRA .)
-    BRA             reduce using rule 39 (cbra -> CBRA .)
-    ID              reduce using rule 39 (cbra -> CBRA .)
-    CKET            reduce using rule 39 (cbra -> CBRA .)
-    LPAR            reduce using rule 39 (cbra -> CBRA .)
-    PI              reduce using rule 39 (cbra -> CBRA .)
-    I               reduce using rule 39 (cbra -> CBRA .)
-    NUMBER          reduce using rule 39 (cbra -> CBRA .)
-    E               reduce using rule 39 (cbra -> CBRA .)
-    CBRA            reduce using rule 39 (cbra -> CBRA .)
-    RPAR            reduce using rule 39 (cbra -> CBRA .)
+    POW             reduce using rule 43 (i -> I .)
+    KET             reduce using rule 43 (i -> I .)
+    CKET            reduce using rule 43 (i -> I .)
+    MULT            reduce using rule 43 (i -> I .)
+    DIV             reduce using rule 43 (i -> I .)
+    ADD             reduce using rule 43 (i -> I .)
+    SUB             reduce using rule 43 (i -> I .)
+    NL              reduce using rule 43 (i -> I .)
+    $end            reduce using rule 43 (i -> I .)
+    BRA             reduce using rule 43 (i -> I .)
+    ID              reduce using rule 43 (i -> I .)
+    INPROD          reduce using rule 43 (i -> I .)
+    LPAR            reduce using rule 43 (i -> I .)
+    PI              reduce using rule 43 (i -> I .)
+    I               reduce using rule 43 (i -> I .)
+    NUMBER          reduce using rule 43 (i -> I .)
+    E               reduce using rule 43 (i -> I .)
+    CBRA            reduce using rule 43 (i -> I .)
+    RPAR            reduce using rule 43 (i -> I .)
 
 
 state 35
+
+    (44) i -> NUMBER . I
+    (42) number -> NUMBER .
+
+  ! shift/reduce conflict for I resolved as shift
+    I               shift and go to state 52
+    POW             reduce using rule 42 (number -> NUMBER .)
+    KET             reduce using rule 42 (number -> NUMBER .)
+    CKET            reduce using rule 42 (number -> NUMBER .)
+    MULT            reduce using rule 42 (number -> NUMBER .)
+    DIV             reduce using rule 42 (number -> NUMBER .)
+    ADD             reduce using rule 42 (number -> NUMBER .)
+    SUB             reduce using rule 42 (number -> NUMBER .)
+    NL              reduce using rule 42 (number -> NUMBER .)
+    $end            reduce using rule 42 (number -> NUMBER .)
+    BRA             reduce using rule 42 (number -> NUMBER .)
+    ID              reduce using rule 42 (number -> NUMBER .)
+    INPROD          reduce using rule 42 (number -> NUMBER .)
+    LPAR            reduce using rule 42 (number -> NUMBER .)
+    PI              reduce using rule 42 (number -> NUMBER .)
+    NUMBER          reduce using rule 42 (number -> NUMBER .)
+    E               reduce using rule 42 (number -> NUMBER .)
+    CBRA            reduce using rule 42 (number -> NUMBER .)
+    RPAR            reduce using rule 42 (number -> NUMBER .)
+
+  ! I               [ reduce using rule 42 (number -> NUMBER .) ]
+
+
+state 36
+
+    (45) e -> E .
+
+    POW             reduce using rule 45 (e -> E .)
+    KET             reduce using rule 45 (e -> E .)
+    CKET            reduce using rule 45 (e -> E .)
+    MULT            reduce using rule 45 (e -> E .)
+    DIV             reduce using rule 45 (e -> E .)
+    ADD             reduce using rule 45 (e -> E .)
+    SUB             reduce using rule 45 (e -> E .)
+    NL              reduce using rule 45 (e -> E .)
+    $end            reduce using rule 45 (e -> E .)
+    BRA             reduce using rule 45 (e -> E .)
+    ID              reduce using rule 45 (e -> E .)
+    INPROD          reduce using rule 45 (e -> E .)
+    LPAR            reduce using rule 45 (e -> E .)
+    PI              reduce using rule 45 (e -> E .)
+    I               reduce using rule 45 (e -> E .)
+    NUMBER          reduce using rule 45 (e -> E .)
+    E               reduce using rule 45 (e -> E .)
+    CBRA            reduce using rule 45 (e -> E .)
+    RPAR            reduce using rule 45 (e -> E .)
+
+
+state 37
+
+    (41) cbra -> CBRA .
+
+    POW             reduce using rule 41 (cbra -> CBRA .)
+    KET             reduce using rule 41 (cbra -> CBRA .)
+    CKET            reduce using rule 41 (cbra -> CBRA .)
+    MULT            reduce using rule 41 (cbra -> CBRA .)
+    DIV             reduce using rule 41 (cbra -> CBRA .)
+    ADD             reduce using rule 41 (cbra -> CBRA .)
+    SUB             reduce using rule 41 (cbra -> CBRA .)
+    NL              reduce using rule 41 (cbra -> CBRA .)
+    $end            reduce using rule 41 (cbra -> CBRA .)
+    BRA             reduce using rule 41 (cbra -> CBRA .)
+    ID              reduce using rule 41 (cbra -> CBRA .)
+    INPROD          reduce using rule 41 (cbra -> CBRA .)
+    LPAR            reduce using rule 41 (cbra -> CBRA .)
+    PI              reduce using rule 41 (cbra -> CBRA .)
+    I               reduce using rule 41 (cbra -> CBRA .)
+    NUMBER          reduce using rule 41 (cbra -> CBRA .)
+    E               reduce using rule 41 (cbra -> CBRA .)
+    CBRA            reduce using rule 41 (cbra -> CBRA .)
+    RPAR            reduce using rule 41 (cbra -> CBRA .)
+
+
+state 38
 
     (1) program -> lines line .
     (5) lines -> lines line .
@@ -1025,6 +1163,7 @@ state 35
     KET             reduce using rule 5 (lines -> lines line .)
     BRA             reduce using rule 5 (lines -> lines line .)
     ID              reduce using rule 5 (lines -> lines line .)
+    INPROD          reduce using rule 5 (lines -> lines line .)
     CKET            reduce using rule 5 (lines -> lines line .)
     LPAR            reduce using rule 5 (lines -> lines line .)
     PI              reduce using rule 5 (lines -> lines line .)
@@ -1034,7 +1173,7 @@ state 35
     CBRA            reduce using rule 5 (lines -> lines line .)
 
 
-state 36
+state 39
 
     (4) line -> expresion NL .
 
@@ -1042,6 +1181,7 @@ state 36
     KET             reduce using rule 4 (line -> expresion NL .)
     BRA             reduce using rule 4 (line -> expresion NL .)
     ID              reduce using rule 4 (line -> expresion NL .)
+    INPROD          reduce using rule 4 (line -> expresion NL .)
     CKET            reduce using rule 4 (line -> expresion NL .)
     LPAR            reduce using rule 4 (line -> expresion NL .)
     PI              reduce using rule 4 (line -> expresion NL .)
@@ -1051,229 +1191,257 @@ state 36
     CBRA            reduce using rule 4 (line -> expresion NL .)
 
 
-state 37
+state 40
 
     (16) e0 -> e0 ADD . e1
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e1                             shift and go to state 49
+    e1                             shift and go to state 53
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
-state 38
+state 41
 
     (17) e0 -> e0 SUB . e1
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e1                             shift and go to state 50
+    e1                             shift and go to state 54
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
-state 39
+state 42
 
     (19) e1 -> e1 MULT . e2
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e2                             shift and go to state 51
-    e3                             shift and go to state 17
-    ket                            shift and go to state 52
-    bra                            shift and go to state 11
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    e2                             shift and go to state 55
+    ket                            shift and go to state 10
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
-state 40
+state 43
 
     (20) e1 -> e1 DIV . e2
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e2                             shift and go to state 53
-    e3                             shift and go to state 17
-    ket                            shift and go to state 52
-    bra                            shift and go to state 11
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    e2                             shift and go to state 56
+    ket                            shift and go to state 10
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
-state 41
+state 44
 
     (9) assign -> des ASSIGN . e0
     (16) e0 -> . e0 ADD e1
@@ -1281,241 +1449,277 @@ state 41
     (18) e0 -> . e1
     (19) e1 -> . e1 MULT e2
     (20) e1 -> . e1 DIV e2
-    (21) e1 -> . ket bra
+    (21) e1 -> . e2 ket
     (22) e1 -> . e2
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (23) e2 -> . e3 POW e3
-    (24) e2 -> . e3
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
+    (23) e2 -> . ket bra
+    (24) e2 -> . inprod
+    (25) e2 -> . e3
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (47) inprod -> . INPROD
+    (26) e3 -> . e4 POW e4
+    (27) e3 -> . e4
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
 
+    INPROD          shift and go to state 22
     KET             shift and go to state 46
-    CKET            shift and go to state 21
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
+    CKET            shift and go to state 24
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
 
-    e0                             shift and go to state 54
+    e0                             shift and go to state 57
     e1                             shift and go to state 7
     e2                             shift and go to state 9
     ket                            shift and go to state 10
-    bra                            shift and go to state 11
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    e3                             shift and go to state 17
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
-
-state 42
-
-    (21) e1 -> ket bra .
-
-    MULT            reduce using rule 21 (e1 -> ket bra .)
-    DIV             reduce using rule 21 (e1 -> ket bra .)
-    ADD             reduce using rule 21 (e1 -> ket bra .)
-    SUB             reduce using rule 21 (e1 -> ket bra .)
-    NL              reduce using rule 21 (e1 -> ket bra .)
-    $end            reduce using rule 21 (e1 -> ket bra .)
-    KET             reduce using rule 21 (e1 -> ket bra .)
-    BRA             reduce using rule 21 (e1 -> ket bra .)
-    ID              reduce using rule 21 (e1 -> ket bra .)
-    CKET            reduce using rule 21 (e1 -> ket bra .)
-    LPAR            reduce using rule 21 (e1 -> ket bra .)
-    PI              reduce using rule 21 (e1 -> ket bra .)
-    I               reduce using rule 21 (e1 -> ket bra .)
-    NUMBER          reduce using rule 21 (e1 -> ket bra .)
-    E               reduce using rule 21 (e1 -> ket bra .)
-    CBRA            reduce using rule 21 (e1 -> ket bra .)
-    RPAR            reduce using rule 21 (e1 -> ket bra .)
-
-
-state 43
-
-    (46) brav -> BRA .
-
-    MULT            reduce using rule 46 (brav -> BRA .)
-    DIV             reduce using rule 46 (brav -> BRA .)
-    ADD             reduce using rule 46 (brav -> BRA .)
-    SUB             reduce using rule 46 (brav -> BRA .)
-    NL              reduce using rule 46 (brav -> BRA .)
-    $end            reduce using rule 46 (brav -> BRA .)
-    KET             reduce using rule 46 (brav -> BRA .)
-    BRA             reduce using rule 46 (brav -> BRA .)
-    ID              reduce using rule 46 (brav -> BRA .)
-    CKET            reduce using rule 46 (brav -> BRA .)
-    LPAR            reduce using rule 46 (brav -> BRA .)
-    PI              reduce using rule 46 (brav -> BRA .)
-    I               reduce using rule 46 (brav -> BRA .)
-    NUMBER          reduce using rule 46 (brav -> BRA .)
-    E               reduce using rule 46 (brav -> BRA .)
-    CBRA            reduce using rule 46 (brav -> BRA .)
-    RPAR            reduce using rule 46 (brav -> BRA .)
-    POW             reduce using rule 46 (brav -> BRA .)
-
-
-state 44
-
-    (23) e2 -> e3 POW . e3
-    (25) e3 -> . ket
-    (26) e3 -> . bra
-    (27) e3 -> . pi
-    (28) e3 -> . id
-    (29) e3 -> . i
-    (30) e3 -> . e
-    (31) e3 -> . number
-    (32) e3 -> . LPAR e0 RPAR
-    (33) ket -> . ketv
-    (34) ket -> . cket
-    (35) bra -> . brav
-    (36) bra -> . cbra
-    (44) pi -> . PI
-    (47) id -> . ID
-    (41) i -> . I
-    (42) i -> . NUMBER I
-    (43) e -> . E
-    (40) number -> . NUMBER
-    (45) ketv -> . KET
-    (38) cket -> . CKET
-    (46) brav -> . BRA
-    (39) cbra -> . CBRA
-
-    LPAR            shift and go to state 27
-    PI              shift and go to state 30
-    ID              shift and go to state 47
-    I               shift and go to state 31
-    NUMBER          shift and go to state 32
-    E               shift and go to state 33
-    KET             shift and go to state 46
-    CKET            shift and go to state 21
-    BRA             shift and go to state 43
-    CBRA            shift and go to state 34
-
-    e3                             shift and go to state 55
-    ket                            shift and go to state 52
-    bra                            shift and go to state 11
-    pi                             shift and go to state 22
-    id                             shift and go to state 23
-    i                              shift and go to state 24
-    e                              shift and go to state 25
-    number                         shift and go to state 26
-    ketv                           shift and go to state 15
-    cket                           shift and go to state 16
-    brav                           shift and go to state 28
-    cbra                           shift and go to state 29
+    bra                            shift and go to state 14
+    inprod                         shift and go to state 15
+    e3                             shift and go to state 16
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    e4                             shift and go to state 23
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
 
 state 45
 
-    (32) e3 -> LPAR e0 . RPAR
-    (16) e0 -> e0 . ADD e1
-    (17) e0 -> e0 . SUB e1
+    (21) e1 -> e2 ket .
 
-    RPAR            shift and go to state 56
-    ADD             shift and go to state 37
-    SUB             shift and go to state 38
+    MULT            reduce using rule 21 (e1 -> e2 ket .)
+    DIV             reduce using rule 21 (e1 -> e2 ket .)
+    ADD             reduce using rule 21 (e1 -> e2 ket .)
+    SUB             reduce using rule 21 (e1 -> e2 ket .)
+    NL              reduce using rule 21 (e1 -> e2 ket .)
+    $end            reduce using rule 21 (e1 -> e2 ket .)
+    KET             reduce using rule 21 (e1 -> e2 ket .)
+    BRA             reduce using rule 21 (e1 -> e2 ket .)
+    ID              reduce using rule 21 (e1 -> e2 ket .)
+    INPROD          reduce using rule 21 (e1 -> e2 ket .)
+    CKET            reduce using rule 21 (e1 -> e2 ket .)
+    LPAR            reduce using rule 21 (e1 -> e2 ket .)
+    PI              reduce using rule 21 (e1 -> e2 ket .)
+    I               reduce using rule 21 (e1 -> e2 ket .)
+    NUMBER          reduce using rule 21 (e1 -> e2 ket .)
+    E               reduce using rule 21 (e1 -> e2 ket .)
+    CBRA            reduce using rule 21 (e1 -> e2 ket .)
+    RPAR            reduce using rule 21 (e1 -> e2 ket .)
 
 
 state 46
 
-    (45) ketv -> KET .
+    (48) ketv -> KET .
 
-    BRA             reduce using rule 45 (ketv -> KET .)
-    CBRA            reduce using rule 45 (ketv -> KET .)
-    POW             reduce using rule 45 (ketv -> KET .)
-    MULT            reduce using rule 45 (ketv -> KET .)
-    DIV             reduce using rule 45 (ketv -> KET .)
-    RPAR            reduce using rule 45 (ketv -> KET .)
-    ADD             reduce using rule 45 (ketv -> KET .)
-    SUB             reduce using rule 45 (ketv -> KET .)
-    NL              reduce using rule 45 (ketv -> KET .)
-    $end            reduce using rule 45 (ketv -> KET .)
-    KET             reduce using rule 45 (ketv -> KET .)
-    ID              reduce using rule 45 (ketv -> KET .)
-    CKET            reduce using rule 45 (ketv -> KET .)
-    LPAR            reduce using rule 45 (ketv -> KET .)
-    PI              reduce using rule 45 (ketv -> KET .)
-    I               reduce using rule 45 (ketv -> KET .)
-    NUMBER          reduce using rule 45 (ketv -> KET .)
-    E               reduce using rule 45 (ketv -> KET .)
+    MULT            reduce using rule 48 (ketv -> KET .)
+    DIV             reduce using rule 48 (ketv -> KET .)
+    ADD             reduce using rule 48 (ketv -> KET .)
+    SUB             reduce using rule 48 (ketv -> KET .)
+    NL              reduce using rule 48 (ketv -> KET .)
+    $end            reduce using rule 48 (ketv -> KET .)
+    KET             reduce using rule 48 (ketv -> KET .)
+    BRA             reduce using rule 48 (ketv -> KET .)
+    ID              reduce using rule 48 (ketv -> KET .)
+    INPROD          reduce using rule 48 (ketv -> KET .)
+    CKET            reduce using rule 48 (ketv -> KET .)
+    LPAR            reduce using rule 48 (ketv -> KET .)
+    PI              reduce using rule 48 (ketv -> KET .)
+    I               reduce using rule 48 (ketv -> KET .)
+    NUMBER          reduce using rule 48 (ketv -> KET .)
+    E               reduce using rule 48 (ketv -> KET .)
+    CBRA            reduce using rule 48 (ketv -> KET .)
+    RPAR            reduce using rule 48 (ketv -> KET .)
+    POW             reduce using rule 48 (ketv -> KET .)
 
 
 state 47
 
-    (47) id -> ID .
+    (23) e2 -> ket bra .
 
-    POW             reduce using rule 47 (id -> ID .)
-    MULT            reduce using rule 47 (id -> ID .)
-    DIV             reduce using rule 47 (id -> ID .)
-    RPAR            reduce using rule 47 (id -> ID .)
-    ADD             reduce using rule 47 (id -> ID .)
-    SUB             reduce using rule 47 (id -> ID .)
-    NL              reduce using rule 47 (id -> ID .)
-    $end            reduce using rule 47 (id -> ID .)
-    KET             reduce using rule 47 (id -> ID .)
-    BRA             reduce using rule 47 (id -> ID .)
-    ID              reduce using rule 47 (id -> ID .)
-    CKET            reduce using rule 47 (id -> ID .)
-    LPAR            reduce using rule 47 (id -> ID .)
-    PI              reduce using rule 47 (id -> ID .)
-    I               reduce using rule 47 (id -> ID .)
-    NUMBER          reduce using rule 47 (id -> ID .)
-    E               reduce using rule 47 (id -> ID .)
-    CBRA            reduce using rule 47 (id -> ID .)
+    KET             reduce using rule 23 (e2 -> ket bra .)
+    CKET            reduce using rule 23 (e2 -> ket bra .)
+    MULT            reduce using rule 23 (e2 -> ket bra .)
+    DIV             reduce using rule 23 (e2 -> ket bra .)
+    ADD             reduce using rule 23 (e2 -> ket bra .)
+    SUB             reduce using rule 23 (e2 -> ket bra .)
+    NL              reduce using rule 23 (e2 -> ket bra .)
+    $end            reduce using rule 23 (e2 -> ket bra .)
+    BRA             reduce using rule 23 (e2 -> ket bra .)
+    ID              reduce using rule 23 (e2 -> ket bra .)
+    INPROD          reduce using rule 23 (e2 -> ket bra .)
+    LPAR            reduce using rule 23 (e2 -> ket bra .)
+    PI              reduce using rule 23 (e2 -> ket bra .)
+    I               reduce using rule 23 (e2 -> ket bra .)
+    NUMBER          reduce using rule 23 (e2 -> ket bra .)
+    E               reduce using rule 23 (e2 -> ket bra .)
+    CBRA            reduce using rule 23 (e2 -> ket bra .)
+    RPAR            reduce using rule 23 (e2 -> ket bra .)
 
 
 state 48
 
-    (42) i -> NUMBER I .
+    (49) brav -> BRA .
 
-    POW             reduce using rule 42 (i -> NUMBER I .)
-    MULT            reduce using rule 42 (i -> NUMBER I .)
-    DIV             reduce using rule 42 (i -> NUMBER I .)
-    ADD             reduce using rule 42 (i -> NUMBER I .)
-    SUB             reduce using rule 42 (i -> NUMBER I .)
-    NL              reduce using rule 42 (i -> NUMBER I .)
-    $end            reduce using rule 42 (i -> NUMBER I .)
-    KET             reduce using rule 42 (i -> NUMBER I .)
-    BRA             reduce using rule 42 (i -> NUMBER I .)
-    ID              reduce using rule 42 (i -> NUMBER I .)
-    CKET            reduce using rule 42 (i -> NUMBER I .)
-    LPAR            reduce using rule 42 (i -> NUMBER I .)
-    PI              reduce using rule 42 (i -> NUMBER I .)
-    I               reduce using rule 42 (i -> NUMBER I .)
-    NUMBER          reduce using rule 42 (i -> NUMBER I .)
-    E               reduce using rule 42 (i -> NUMBER I .)
-    CBRA            reduce using rule 42 (i -> NUMBER I .)
-    RPAR            reduce using rule 42 (i -> NUMBER I .)
+    KET             reduce using rule 49 (brav -> BRA .)
+    CKET            reduce using rule 49 (brav -> BRA .)
+    MULT            reduce using rule 49 (brav -> BRA .)
+    DIV             reduce using rule 49 (brav -> BRA .)
+    ADD             reduce using rule 49 (brav -> BRA .)
+    SUB             reduce using rule 49 (brav -> BRA .)
+    NL              reduce using rule 49 (brav -> BRA .)
+    $end            reduce using rule 49 (brav -> BRA .)
+    BRA             reduce using rule 49 (brav -> BRA .)
+    ID              reduce using rule 49 (brav -> BRA .)
+    INPROD          reduce using rule 49 (brav -> BRA .)
+    LPAR            reduce using rule 49 (brav -> BRA .)
+    PI              reduce using rule 49 (brav -> BRA .)
+    I               reduce using rule 49 (brav -> BRA .)
+    NUMBER          reduce using rule 49 (brav -> BRA .)
+    E               reduce using rule 49 (brav -> BRA .)
+    CBRA            reduce using rule 49 (brav -> BRA .)
+    RPAR            reduce using rule 49 (brav -> BRA .)
+    POW             reduce using rule 49 (brav -> BRA .)
 
 
 state 49
+
+    (26) e3 -> e4 POW . e4
+    (28) e4 -> . ket
+    (29) e4 -> . bra
+    (30) e4 -> . pi
+    (31) e4 -> . id
+    (32) e4 -> . i
+    (33) e4 -> . e
+    (34) e4 -> . number
+    (35) e4 -> . LPAR e0 RPAR
+    (36) ket -> . ketv
+    (37) ket -> . cket
+    (38) bra -> . brav
+    (39) bra -> . cbra
+    (46) pi -> . PI
+    (50) id -> . ID
+    (43) i -> . I
+    (44) i -> . NUMBER I
+    (45) e -> . E
+    (42) number -> . NUMBER
+    (48) ketv -> . KET
+    (40) cket -> . CKET
+    (49) brav -> . BRA
+    (41) cbra -> . CBRA
+
+    LPAR            shift and go to state 30
+    PI              shift and go to state 33
+    ID              shift and go to state 51
+    I               shift and go to state 34
+    NUMBER          shift and go to state 35
+    E               shift and go to state 36
+    KET             shift and go to state 46
+    CKET            shift and go to state 24
+    BRA             shift and go to state 48
+    CBRA            shift and go to state 37
+
+    e4                             shift and go to state 58
+    ket                            shift and go to state 59
+    bra                            shift and go to state 14
+    pi                             shift and go to state 25
+    id                             shift and go to state 26
+    i                              shift and go to state 27
+    e                              shift and go to state 28
+    number                         shift and go to state 29
+    ketv                           shift and go to state 20
+    cket                           shift and go to state 21
+    brav                           shift and go to state 31
+    cbra                           shift and go to state 32
+
+state 50
+
+    (35) e4 -> LPAR e0 . RPAR
+    (16) e0 -> e0 . ADD e1
+    (17) e0 -> e0 . SUB e1
+
+    RPAR            shift and go to state 60
+    ADD             shift and go to state 40
+    SUB             shift and go to state 41
+
+
+state 51
+
+    (50) id -> ID .
+
+    POW             reduce using rule 50 (id -> ID .)
+    KET             reduce using rule 50 (id -> ID .)
+    CKET            reduce using rule 50 (id -> ID .)
+    MULT            reduce using rule 50 (id -> ID .)
+    DIV             reduce using rule 50 (id -> ID .)
+    RPAR            reduce using rule 50 (id -> ID .)
+    ADD             reduce using rule 50 (id -> ID .)
+    SUB             reduce using rule 50 (id -> ID .)
+    NL              reduce using rule 50 (id -> ID .)
+    $end            reduce using rule 50 (id -> ID .)
+    BRA             reduce using rule 50 (id -> ID .)
+    ID              reduce using rule 50 (id -> ID .)
+    INPROD          reduce using rule 50 (id -> ID .)
+    LPAR            reduce using rule 50 (id -> ID .)
+    PI              reduce using rule 50 (id -> ID .)
+    I               reduce using rule 50 (id -> ID .)
+    NUMBER          reduce using rule 50 (id -> ID .)
+    E               reduce using rule 50 (id -> ID .)
+    CBRA            reduce using rule 50 (id -> ID .)
+
+
+state 52
+
+    (44) i -> NUMBER I .
+
+    POW             reduce using rule 44 (i -> NUMBER I .)
+    KET             reduce using rule 44 (i -> NUMBER I .)
+    CKET            reduce using rule 44 (i -> NUMBER I .)
+    MULT            reduce using rule 44 (i -> NUMBER I .)
+    DIV             reduce using rule 44 (i -> NUMBER I .)
+    ADD             reduce using rule 44 (i -> NUMBER I .)
+    SUB             reduce using rule 44 (i -> NUMBER I .)
+    NL              reduce using rule 44 (i -> NUMBER I .)
+    $end            reduce using rule 44 (i -> NUMBER I .)
+    BRA             reduce using rule 44 (i -> NUMBER I .)
+    ID              reduce using rule 44 (i -> NUMBER I .)
+    INPROD          reduce using rule 44 (i -> NUMBER I .)
+    LPAR            reduce using rule 44 (i -> NUMBER I .)
+    PI              reduce using rule 44 (i -> NUMBER I .)
+    I               reduce using rule 44 (i -> NUMBER I .)
+    NUMBER          reduce using rule 44 (i -> NUMBER I .)
+    E               reduce using rule 44 (i -> NUMBER I .)
+    CBRA            reduce using rule 44 (i -> NUMBER I .)
+    RPAR            reduce using rule 44 (i -> NUMBER I .)
+
+
+state 53
 
     (16) e0 -> e0 ADD e1 .
     (19) e1 -> e1 . MULT e2
@@ -1528,6 +1732,7 @@ state 49
     KET             reduce using rule 16 (e0 -> e0 ADD e1 .)
     BRA             reduce using rule 16 (e0 -> e0 ADD e1 .)
     ID              reduce using rule 16 (e0 -> e0 ADD e1 .)
+    INPROD          reduce using rule 16 (e0 -> e0 ADD e1 .)
     CKET            reduce using rule 16 (e0 -> e0 ADD e1 .)
     LPAR            reduce using rule 16 (e0 -> e0 ADD e1 .)
     PI              reduce using rule 16 (e0 -> e0 ADD e1 .)
@@ -1536,11 +1741,11 @@ state 49
     E               reduce using rule 16 (e0 -> e0 ADD e1 .)
     CBRA            reduce using rule 16 (e0 -> e0 ADD e1 .)
     RPAR            reduce using rule 16 (e0 -> e0 ADD e1 .)
-    MULT            shift and go to state 39
-    DIV             shift and go to state 40
+    MULT            shift and go to state 42
+    DIV             shift and go to state 43
 
 
-state 50
+state 54
 
     (17) e0 -> e0 SUB e1 .
     (19) e1 -> e1 . MULT e2
@@ -1553,6 +1758,7 @@ state 50
     KET             reduce using rule 17 (e0 -> e0 SUB e1 .)
     BRA             reduce using rule 17 (e0 -> e0 SUB e1 .)
     ID              reduce using rule 17 (e0 -> e0 SUB e1 .)
+    INPROD          reduce using rule 17 (e0 -> e0 SUB e1 .)
     CKET            reduce using rule 17 (e0 -> e0 SUB e1 .)
     LPAR            reduce using rule 17 (e0 -> e0 SUB e1 .)
     PI              reduce using rule 17 (e0 -> e0 SUB e1 .)
@@ -1561,11 +1767,11 @@ state 50
     E               reduce using rule 17 (e0 -> e0 SUB e1 .)
     CBRA            reduce using rule 17 (e0 -> e0 SUB e1 .)
     RPAR            reduce using rule 17 (e0 -> e0 SUB e1 .)
-    MULT            shift and go to state 39
-    DIV             shift and go to state 40
+    MULT            shift and go to state 42
+    DIV             shift and go to state 43
 
 
-state 51
+state 55
 
     (19) e1 -> e1 MULT e2 .
 
@@ -1578,6 +1784,7 @@ state 51
     KET             reduce using rule 19 (e1 -> e1 MULT e2 .)
     BRA             reduce using rule 19 (e1 -> e1 MULT e2 .)
     ID              reduce using rule 19 (e1 -> e1 MULT e2 .)
+    INPROD          reduce using rule 19 (e1 -> e1 MULT e2 .)
     CKET            reduce using rule 19 (e1 -> e1 MULT e2 .)
     LPAR            reduce using rule 19 (e1 -> e1 MULT e2 .)
     PI              reduce using rule 19 (e1 -> e1 MULT e2 .)
@@ -1588,31 +1795,7 @@ state 51
     RPAR            reduce using rule 19 (e1 -> e1 MULT e2 .)
 
 
-state 52
-
-    (25) e3 -> ket .
-
-    POW             reduce using rule 25 (e3 -> ket .)
-    MULT            reduce using rule 25 (e3 -> ket .)
-    DIV             reduce using rule 25 (e3 -> ket .)
-    ADD             reduce using rule 25 (e3 -> ket .)
-    SUB             reduce using rule 25 (e3 -> ket .)
-    NL              reduce using rule 25 (e3 -> ket .)
-    $end            reduce using rule 25 (e3 -> ket .)
-    KET             reduce using rule 25 (e3 -> ket .)
-    BRA             reduce using rule 25 (e3 -> ket .)
-    ID              reduce using rule 25 (e3 -> ket .)
-    CKET            reduce using rule 25 (e3 -> ket .)
-    LPAR            reduce using rule 25 (e3 -> ket .)
-    PI              reduce using rule 25 (e3 -> ket .)
-    I               reduce using rule 25 (e3 -> ket .)
-    NUMBER          reduce using rule 25 (e3 -> ket .)
-    E               reduce using rule 25 (e3 -> ket .)
-    CBRA            reduce using rule 25 (e3 -> ket .)
-    RPAR            reduce using rule 25 (e3 -> ket .)
-
-
-state 53
+state 56
 
     (20) e1 -> e1 DIV e2 .
 
@@ -1625,6 +1808,7 @@ state 53
     KET             reduce using rule 20 (e1 -> e1 DIV e2 .)
     BRA             reduce using rule 20 (e1 -> e1 DIV e2 .)
     ID              reduce using rule 20 (e1 -> e1 DIV e2 .)
+    INPROD          reduce using rule 20 (e1 -> e1 DIV e2 .)
     CKET            reduce using rule 20 (e1 -> e1 DIV e2 .)
     LPAR            reduce using rule 20 (e1 -> e1 DIV e2 .)
     PI              reduce using rule 20 (e1 -> e1 DIV e2 .)
@@ -1635,7 +1819,7 @@ state 53
     RPAR            reduce using rule 20 (e1 -> e1 DIV e2 .)
 
 
-state 54
+state 57
 
     (9) assign -> des ASSIGN e0 .
     (16) e0 -> e0 . ADD e1
@@ -1646,6 +1830,7 @@ state 54
     KET             reduce using rule 9 (assign -> des ASSIGN e0 .)
     BRA             reduce using rule 9 (assign -> des ASSIGN e0 .)
     ID              reduce using rule 9 (assign -> des ASSIGN e0 .)
+    INPROD          reduce using rule 9 (assign -> des ASSIGN e0 .)
     CKET            reduce using rule 9 (assign -> des ASSIGN e0 .)
     LPAR            reduce using rule 9 (assign -> des ASSIGN e0 .)
     PI              reduce using rule 9 (assign -> des ASSIGN e0 .)
@@ -1653,59 +1838,87 @@ state 54
     NUMBER          reduce using rule 9 (assign -> des ASSIGN e0 .)
     E               reduce using rule 9 (assign -> des ASSIGN e0 .)
     CBRA            reduce using rule 9 (assign -> des ASSIGN e0 .)
-    ADD             shift and go to state 37
-    SUB             shift and go to state 38
+    ADD             shift and go to state 40
+    SUB             shift and go to state 41
 
 
-state 55
+state 58
 
-    (23) e2 -> e3 POW e3 .
+    (26) e3 -> e4 POW e4 .
 
-    MULT            reduce using rule 23 (e2 -> e3 POW e3 .)
-    DIV             reduce using rule 23 (e2 -> e3 POW e3 .)
-    ADD             reduce using rule 23 (e2 -> e3 POW e3 .)
-    SUB             reduce using rule 23 (e2 -> e3 POW e3 .)
-    NL              reduce using rule 23 (e2 -> e3 POW e3 .)
-    $end            reduce using rule 23 (e2 -> e3 POW e3 .)
-    KET             reduce using rule 23 (e2 -> e3 POW e3 .)
-    BRA             reduce using rule 23 (e2 -> e3 POW e3 .)
-    ID              reduce using rule 23 (e2 -> e3 POW e3 .)
-    CKET            reduce using rule 23 (e2 -> e3 POW e3 .)
-    LPAR            reduce using rule 23 (e2 -> e3 POW e3 .)
-    PI              reduce using rule 23 (e2 -> e3 POW e3 .)
-    I               reduce using rule 23 (e2 -> e3 POW e3 .)
-    NUMBER          reduce using rule 23 (e2 -> e3 POW e3 .)
-    E               reduce using rule 23 (e2 -> e3 POW e3 .)
-    CBRA            reduce using rule 23 (e2 -> e3 POW e3 .)
-    RPAR            reduce using rule 23 (e2 -> e3 POW e3 .)
+    KET             reduce using rule 26 (e3 -> e4 POW e4 .)
+    CKET            reduce using rule 26 (e3 -> e4 POW e4 .)
+    MULT            reduce using rule 26 (e3 -> e4 POW e4 .)
+    DIV             reduce using rule 26 (e3 -> e4 POW e4 .)
+    ADD             reduce using rule 26 (e3 -> e4 POW e4 .)
+    SUB             reduce using rule 26 (e3 -> e4 POW e4 .)
+    NL              reduce using rule 26 (e3 -> e4 POW e4 .)
+    $end            reduce using rule 26 (e3 -> e4 POW e4 .)
+    BRA             reduce using rule 26 (e3 -> e4 POW e4 .)
+    ID              reduce using rule 26 (e3 -> e4 POW e4 .)
+    INPROD          reduce using rule 26 (e3 -> e4 POW e4 .)
+    LPAR            reduce using rule 26 (e3 -> e4 POW e4 .)
+    PI              reduce using rule 26 (e3 -> e4 POW e4 .)
+    I               reduce using rule 26 (e3 -> e4 POW e4 .)
+    NUMBER          reduce using rule 26 (e3 -> e4 POW e4 .)
+    E               reduce using rule 26 (e3 -> e4 POW e4 .)
+    CBRA            reduce using rule 26 (e3 -> e4 POW e4 .)
+    RPAR            reduce using rule 26 (e3 -> e4 POW e4 .)
 
 
-state 56
+state 59
 
-    (32) e3 -> LPAR e0 RPAR .
+    (28) e4 -> ket .
 
-    POW             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    MULT            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    DIV             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    ADD             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    SUB             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    NL              reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    $end            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    KET             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    BRA             reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    ID              reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    CKET            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    LPAR            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    PI              reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    I               reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    NUMBER          reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    E               reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    CBRA            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
-    RPAR            reduce using rule 32 (e3 -> LPAR e0 RPAR .)
+    KET             reduce using rule 28 (e4 -> ket .)
+    CKET            reduce using rule 28 (e4 -> ket .)
+    MULT            reduce using rule 28 (e4 -> ket .)
+    DIV             reduce using rule 28 (e4 -> ket .)
+    ADD             reduce using rule 28 (e4 -> ket .)
+    SUB             reduce using rule 28 (e4 -> ket .)
+    NL              reduce using rule 28 (e4 -> ket .)
+    $end            reduce using rule 28 (e4 -> ket .)
+    BRA             reduce using rule 28 (e4 -> ket .)
+    ID              reduce using rule 28 (e4 -> ket .)
+    INPROD          reduce using rule 28 (e4 -> ket .)
+    LPAR            reduce using rule 28 (e4 -> ket .)
+    PI              reduce using rule 28 (e4 -> ket .)
+    I               reduce using rule 28 (e4 -> ket .)
+    NUMBER          reduce using rule 28 (e4 -> ket .)
+    E               reduce using rule 28 (e4 -> ket .)
+    CBRA            reduce using rule 28 (e4 -> ket .)
+    RPAR            reduce using rule 28 (e4 -> ket .)
+
+
+state 60
+
+    (35) e4 -> LPAR e0 RPAR .
+
+    POW             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    KET             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    CKET            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    MULT            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    DIV             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    ADD             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    SUB             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    NL              reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    $end            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    BRA             reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    ID              reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    INPROD          reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    LPAR            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    PI              reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    I               reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    NUMBER          reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    E               reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    CBRA            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
+    RPAR            reduce using rule 35 (e4 -> LPAR e0 RPAR .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
+WARNING: shift/reduce conflict for KET in state 9 resolved as shift
+WARNING: shift/reduce conflict for CKET in state 9 resolved as shift
 WARNING: shift/reduce conflict for BRA in state 10 resolved as shift
 WARNING: shift/reduce conflict for CBRA in state 10 resolved as shift
-WARNING: shift/reduce conflict for I in state 32 resolved as shift
+WARNING: shift/reduce conflict for I in state 35 resolved as shift

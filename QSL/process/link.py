@@ -37,6 +37,10 @@ class link:
         for exp in expr.expr:
             exp.visit(self)
 
+    def visit_inner(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+
     def visit_cket(self, ket):
         pass
     

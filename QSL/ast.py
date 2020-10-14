@@ -40,6 +40,9 @@ class bin_expr:
         self.value = None
         self.expr.append(exp0)
         self.expr.append(exp1)
+
+    def __getitem__(self, key):
+        return self.expr[key]
         
     def visit(self):
         raise NotImplementedError
@@ -67,6 +70,10 @@ class divOp(bin_expr):
 class powOp(bin_expr):
     def visit(self, visitor):
         return visitor.visit_pow(self)
+    
+class innerOp(bin_expr):
+    def visit(self, visitor):
+        return visitor.visit_inner(self)
 
 class complex_expr:
     def __init__(self, amplitude, exp):

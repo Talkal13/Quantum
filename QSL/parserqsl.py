@@ -4,7 +4,7 @@ import ply.yacc as yacc
 
 from lexer import tokens
 import re
-from ast import addOp, subOp, dotOp, multOp, divOp, powOp, assign, ket_expr, bra_expr, id_expr, ket_des, bra_des, id_des, cket, cbra, program, complex_expr, number, complex_number
+from ast import addOp, subOp, dotOp, multOp, divOp, powOp, innerOp, assign, ket_expr, bra_expr, id_expr, ket_des, bra_des, id_des, cket, cbra, program, complex_expr, number, complex_number
 
 
 start = 'program'
@@ -79,28 +79,38 @@ def p_e0(p):
 def p_e1(p):
     '''e1 : e1 MULT e2
             | e1 DIV e2
-            | ket bra
+            | e2 ket
             | e2'''
-    if (len(p) == 3):
-        p[0] = dotOp(p[1], p[2])
-    elif (len(p) == 4):
+    if (len(p) == 4):
         if (p[2] == '*'):
             p[0] = multOp(p[1], p[3])
         else:
             p[0] = divOp(p[1], p[3])
+    elif len(p) == 3:
+        p[0] = multOp(p[1], p[2])
     else:
         p[0] = p[1]
 
 def p_e2(p):
-    '''e2 : e3 POW e3
+    '''e2 : ket bra
+            | inprod
             | e3'''
+    if (len(p) == 3):
+        p[0] = dotOp(p[1], p[2])
+    else:
+        p[0] = p[1]
+
+
+def p_e3(p):
+    '''e3 : e4 POW e4
+            | e4'''
     if (len(p) == 4):
         p[0] = powOp(p[1], p[3])
     else:
         p[0] = p[1]
 
-def p_e3(p):
-    '''e3 : ket
+def p_e4(p):
+    '''e4 : ket
             | bra
             | pi
             | id
@@ -123,18 +133,6 @@ def p_bra(p):
             | cbra'''
     p[0] = p[1]
 
-
-# Numbers
-def p_complex(p):
-    ''' complex :  E POW LPAR e0 RPAR'''
-    if (len(p) == 7):
-        p[0] = complex_expr(p[1], p[5])
-    elif(len(p) == 6):
-        p[0] = complex_expr(number("1"), p[4])
-    elif (len(p) == 5):
-        p[0] = complex_expr(p[1], number("1"))
-    elif (len(p) == 4):
-        p[0] = complex_expr(number("1"), number("1"))
 
 # Constants
 def p_cket(p):
@@ -167,6 +165,19 @@ def p_pi(p):
     'pi : PI'
     p[0] = number(p[1])
 
+def p_inprod(p):
+    'inprod : INPROD'
+    val0 = re.search(r'\<(.*?)\|', p[1]).group(1)
+    if (val0.isdigit()):
+        braq = cbra(val0)
+    else:
+        braq = bra_expr(val0)
+    val1 = re.search(r'\|(.*?)\>', p[1]).group(1)
+    if (val1.isdigit()):
+        kett = cket(val1)
+    else:
+        kett = ket_expr(val1)
+    p[0] = innerOp(braq, kett)
 
 # Variables 
 def p_ketv(p):

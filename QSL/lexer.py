@@ -16,6 +16,7 @@ tokens = [
     'ADD',
     'SUB',
     'DIV',
+    'INPROD',
     'ASSIGN',
     # Constants
     'NUMBER',
@@ -49,6 +50,10 @@ def t_BRA(t):
 
 def t_KET(t):
     r'\|[a-zA-Z][a-zA-Z_0-9]*\>'
+    return t
+
+def t_INPROD(t):
+    r'<[a-zA-Z_0-9]+\|[a-zA-Z_0-9]+\>'
     return t
 
 def t_CBRA(t):

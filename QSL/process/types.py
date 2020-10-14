@@ -62,6 +62,11 @@ class types:
         # if (expr.expr[0].type != T_NUMBER or (expr.expr[1].type != T_COMPLEX or expr.expr[1].type != T_NUMBER)):
         #     raise Exception("Type error") #TODO
         expr.type = expr.expr[1].type
+    
+    def visit_inner(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        expr.type = T_COMPLEX
 
     def visit_complex(self, comp):
         comp.A.visit(self)
