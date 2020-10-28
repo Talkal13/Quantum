@@ -1,9 +1,8 @@
+class slink:
 
-
-class link:
-
-    def __init__(self, tv):
-        self.tv = tv
+    def __init__(self):
+        self.value = None
+        self.tv = []
 
     def visit_program(self, program):
         for line in program.lines:
@@ -13,40 +12,38 @@ class link:
         load.ast.visit(self)
 
     def visit_assign(self, assig):
-        assig.des.visit(self)
+        self.value = assig.des
         assig.expr.visit(self)
+        self.value = None
+
+    def slink_bin(self, expr):
+        for exp in expr.expr:
+            exp.visit(self)
+        expr.slins = self.tv
 
     def visit_add(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)   
 
     def visit_sub(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_dot(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_mult(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
     
     def visit_div(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_pow(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_inner(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_tensor(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        self.slink_bin(expr)
 
     def visit_cket(self, ket):
         pass
@@ -55,17 +52,13 @@ class link:
         pass
 
     def visit_ket(self, des):
-        des.link = self.tv[des.id]
+        self.tv.append(des.link)
     
     def visit_bra(self, des):
-        des.link = self.tv[des.id]
+        self.tv.append(des.link)
 
     def visit_id(self, des):
-        des.link = self.tv[des.id]
-    
-    def visit_complex(self, comp):
-        comp.A.visit(self)
-        comp.exp.visit(self)
+        pass
     
     def visit_number(self, numb):
         pass
@@ -76,22 +69,21 @@ class link:
     def visit_matrix(self, matrix):
         pass
 
-    def visit_measure(self, measure):
-        if (not measure.basis.isdigit()):
-            measure.link = self.tv[measure.basis]
-
     def visit_ket_des(self, link):
-        self.tv[link.id] = link
+        pass
     
     def visit_bra_des(self, link):
-        self.tv[link.id] = link
+        pass
 
     def visit_id_des(self, link):
-        self.tv[link.id] = link
+        pass
 
     def visit_bbdef(self, link):
         link.statements.visit(self)
 
     def visit_bbstate_matrix(self, state):
         state.matrix.visit(self)
+
+    def visit_measure(self, measure):
+        pass
     

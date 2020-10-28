@@ -1,53 +1,43 @@
+class load:
 
-
-class link:
-
-    def __init__(self, tv):
-        self.tv = tv
+    def __init__(self, parser):
+        self.parser = parser
 
     def visit_program(self, program):
         for line in program.lines:
             line.visit(self)
-        
+    
     def visit_load(self, load):
+        data = open(load.file).read()
+        load.ast = self.parser.parse(data)
         load.ast.visit(self)
 
     def visit_assign(self, assig):
-        assig.des.visit(self)
-        assig.expr.visit(self)
+        pass
 
     def visit_add(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_sub(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_dot(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_mult(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
     
     def visit_div(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_pow(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_inner(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
+        pass
 
     def visit_tensor(self, expr):
-        for exp in expr.expr:
-            exp.visit(self)
-
+        pass
     def visit_cket(self, ket):
         pass
     
@@ -55,17 +45,16 @@ class link:
         pass
 
     def visit_ket(self, des):
-        des.link = self.tv[des.id]
+        pass
     
     def visit_bra(self, des):
-        des.link = self.tv[des.id]
+        pass
 
     def visit_id(self, des):
-        des.link = self.tv[des.id]
+        pass
     
     def visit_complex(self, comp):
-        comp.A.visit(self)
-        comp.exp.visit(self)
+        pass
     
     def visit_number(self, numb):
         pass
@@ -77,21 +66,19 @@ class link:
         pass
 
     def visit_measure(self, measure):
-        if (not measure.basis.isdigit()):
-            measure.link = self.tv[measure.basis]
+        pass
 
     def visit_ket_des(self, link):
-        self.tv[link.id] = link
+        pass
     
     def visit_bra_des(self, link):
-        self.tv[link.id] = link
+        pass
 
     def visit_id_des(self, link):
-        self.tv[link.id] = link
-
+        pass
+    
     def visit_bbdef(self, link):
-        link.statements.visit(self)
+        pass
 
     def visit_bbstate_matrix(self, state):
-        state.matrix.visit(self)
-    
+        pass

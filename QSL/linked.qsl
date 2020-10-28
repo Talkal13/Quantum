@@ -1,0 +1,10 @@
+import "lib/gates"
+
+|a> = H|0>
+|b> = |0>
+|c> = CX |a>|b>
+K = |c><c|
+A = K^2
+
+
+
